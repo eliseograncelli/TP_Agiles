@@ -18,11 +18,19 @@ func createGame(word string) GameState {
 	}
 }
 
-func (state *GameState) guessLetter(letter rune) string {
+type GameResponse int64
+
+const (
+	Repited_Letter GameResponse = iota
+	Correct_Letter
+	Wrong_Letter
+)
+
+func (state *GameState) guessLetter(letter rune) GameResponse {
 
 	for _, v := range state.usedLetters {
 		if v == letter {
-			return "used letter"
+			return Repited_Letter
 		}
 	}
 
@@ -35,10 +43,10 @@ func (state *GameState) guessLetter(letter rune) string {
 		}
 	}
 	if found {
-		return "matched"
+		return Correct_Letter
 	} else {
 		state.lives -= 1
-		return "loss live"
+		return Wrong_Letter
 	}
 
 }

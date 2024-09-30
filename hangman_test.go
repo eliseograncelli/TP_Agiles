@@ -22,7 +22,7 @@ func TestGuessCorrectLetter(t *testing.T) {
 	s := createGame("hola")
 
 	res := s.guessLetter('l')
-	if res != "matched" {
+	if res != Correct_Letter {
 		t.Fatalf("Didn't matched letter 'L'")
 	}
 }
@@ -33,7 +33,7 @@ func TestGuessCorrectLetterTwice(t *testing.T) {
 	s.guessLetter('l')
 	res := s.guessLetter('l')
 
-	if res != "used letter" {
+	if res != Repited_Letter {
 		t.Fatalf("Didn't realized that 'L' was guest twice")
 	}
 
@@ -42,7 +42,7 @@ func TestGuessWrongLetter(t *testing.T) {
 	s := createGame("hola")
 
 	res := s.guessLetter('z')
-	if res != "loss live" {
+	if res != Wrong_Letter {
 		t.Fatalf("Didn't fail")
 	}
 	if s.lives != 6 {
