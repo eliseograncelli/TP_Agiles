@@ -1,2 +1,11 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import Hangman from './hangman.svelte';
+
+	let lives = 7;
+</script>
+
+<h1>TP AGILES</h1>
+
+<input type="number" bind:value={lives} />
+
+<Hangman {lives} />
