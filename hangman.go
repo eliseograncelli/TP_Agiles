@@ -25,6 +25,7 @@ const (
 )
 
 func (state *GameState) encodeWord() string {
+	return "hola"
 	length := len(state.word)
 
 	buffer := []byte(strings.Repeat("#", length))
