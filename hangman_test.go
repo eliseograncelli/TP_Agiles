@@ -38,6 +38,7 @@ func TestGuessCorrectLetterTwice(t *testing.T) {
 	}
 
 }
+
 func TestGuessWrongLetter(t *testing.T) {
 	s := createGame("hola")
 
@@ -47,5 +48,65 @@ func TestGuessWrongLetter(t *testing.T) {
 	}
 	if s.lives != 6 {
 		t.Fatalf("Dind't substract live")
+	}
+}
+
+func Test_encode_word_all_empty_4(t *testing.T) {
+	s := createGame("hola")
+	res := s.encodeWord()
+
+	if res != "####" {
+		t.Fatal()
+	}
+}
+
+func Test_encode_word_all_empty_6(t *testing.T) {
+	s := createGame("buenas")
+	res := s.encodeWord()
+
+	if res != "######" {
+		t.Fatal()
+	}
+}
+
+func Test_encode_first_gussed(t *testing.T) {
+	s := createGame("hola")
+	s.guessLetter('h')
+	res := s.encodeWord()
+
+	if res != "h###" {
+		t.Fatal()
+	}
+}
+
+func Test_encode_first_gussed_missed_second(t *testing.T) {
+	s := createGame("hola")
+	s.guessLetter('h')
+	s.guessLetter('y')
+	res := s.encodeWord()
+
+	if res != "h###" {
+		t.Fatal()
+	}
+}
+
+func Test_encode_first_and_second(t *testing.T) {
+	s := createGame("hola")
+	s.guessLetter('h')
+	s.guessLetter('l')
+	res := s.encodeWord()
+
+	if res != "h#l#" {
+		t.Fatal()
+	}
+}
+
+func Test_encode_guest_duplicated_letter(t *testing.T) {
+	s := createGame("perro")
+	s.guessLetter('r')
+	res := s.encodeWord()
+
+	if res != "##rr#" {
+		t.Fatal()
 	}
 }

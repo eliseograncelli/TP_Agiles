@@ -1,8 +1,6 @@
 package main
 
-import (
-	"fmt"
-)
+import "strings"
 
 type GameState struct {
 	lives       int
@@ -26,8 +24,25 @@ const (
 	Wrong_Letter
 )
 
+func (state *GameState) encodeWord() string {
+	length := len(state.word)
+
+	buffer := []byte(strings.Repeat("#", length))
+
+	for _, guessed := range state.usedLetters {
+		for i, letter_in_word := range state.word {
+			if guessed == letter_in_word {
+				buffer[i] = byte(guessed)
+			}
+		}
+	}
+
+	return string(buffer)
+}
+
 func (state *GameState) guessLetter(letter rune) GameResponse {
 
+	//TODO: caracters invalidos
 	for _, v := range state.usedLetters {
 		if v == letter {
 			return Repited_Letter
@@ -48,17 +63,5 @@ func (state *GameState) guessLetter(letter rune) GameResponse {
 		state.lives -= 1
 		return Wrong_Letter
 	}
-
-}
-
-func main() {
-	s := createGame("hola")
-	fmt.Printf("s.word: %v\n", s.word)
-	fmt.Printf("s.guessLetter('h'): %v\n", s.guessLetter('h'))
-	fmt.Printf("s: %v\n", s)
-	fmt.Printf("s.guessLetter('h'): %v\n", s.guessLetter('h'))
-	fmt.Printf("s: %v\n", s)
-	fmt.Printf("s.guessLetter('j'): %v\n", s.guessLetter('j'))
-	fmt.Printf("s: %v\n", s)
 
 }
