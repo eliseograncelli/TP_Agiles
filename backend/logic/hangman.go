@@ -1,4 +1,4 @@
-package main
+package logic
 
 import "strings"
 
@@ -8,7 +8,7 @@ type GameState struct {
 	usedLetters []rune
 }
 
-func createGame(word string) GameState {
+func CreateGame(word string) GameState {
 	return GameState{
 		lives:       7,
 		word:        word,

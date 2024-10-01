@@ -1,11 +1,11 @@
-package main
+package logic
 
 import (
 	"testing"
 )
 
 func TestCreateGame(t *testing.T) {
-	s := createGame("hola")
+	s := CreateGame("hola")
 
 	if s.lives != 7 {
 		t.Fatalf("Wrong lives")
@@ -19,7 +19,7 @@ func TestCreateGame(t *testing.T) {
 }
 
 func TestGuessCorrectLetter(t *testing.T) {
-	s := createGame("hola")
+	s := CreateGame("hola")
 
 	res := s.guessLetter('l')
 	if res != Correct_Letter {
@@ -28,7 +28,7 @@ func TestGuessCorrectLetter(t *testing.T) {
 }
 
 func TestGuessCorrectLetterTwice(t *testing.T) {
-	s := createGame("hola")
+	s := CreateGame("hola")
 
 	s.guessLetter('l')
 	res := s.guessLetter('l')
@@ -40,7 +40,7 @@ func TestGuessCorrectLetterTwice(t *testing.T) {
 }
 
 func TestGuessWrongLetter(t *testing.T) {
-	s := createGame("hola")
+	s := CreateGame("hola")
 
 	res := s.guessLetter('z')
 	if res != Wrong_Letter {
@@ -52,7 +52,7 @@ func TestGuessWrongLetter(t *testing.T) {
 }
 
 func Test_encode_word_all_empty_4(t *testing.T) {
-	s := createGame("hola")
+	s := CreateGame("hola")
 	res := s.encodeWord()
 
 	if res != "####" {
@@ -61,7 +61,7 @@ func Test_encode_word_all_empty_4(t *testing.T) {
 }
 
 func Test_encode_word_all_empty_6(t *testing.T) {
-	s := createGame("buenas")
+	s := CreateGame("buenas")
 	res := s.encodeWord()
 
 	if res != "######" {
@@ -70,7 +70,7 @@ func Test_encode_word_all_empty_6(t *testing.T) {
 }
 
 func Test_encode_first_gussed(t *testing.T) {
-	s := createGame("hola")
+	s := CreateGame("hola")
 	s.guessLetter('h')
 	res := s.encodeWord()
 
@@ -80,7 +80,7 @@ func Test_encode_first_gussed(t *testing.T) {
 }
 
 func Test_encode_first_gussed_missed_second(t *testing.T) {
-	s := createGame("hola")
+	s := CreateGame("hola")
 	s.guessLetter('h')
 	s.guessLetter('y')
 	res := s.encodeWord()
@@ -91,7 +91,7 @@ func Test_encode_first_gussed_missed_second(t *testing.T) {
 }
 
 func Test_encode_first_and_second(t *testing.T) {
-	s := createGame("hola")
+	s := CreateGame("hola")
 	s.guessLetter('h')
 	s.guessLetter('l')
 	res := s.encodeWord()
@@ -102,7 +102,7 @@ func Test_encode_first_and_second(t *testing.T) {
 }
 
 func Test_encode_guest_duplicated_letter(t *testing.T) {
-	s := createGame("perro")
+	s := CreateGame("perro")
 	s.guessLetter('r')
 	res := s.encodeWord()
 
