@@ -1,4 +1,4 @@
-name: Go Test
+name: Golang Tests
 
 on:
   push:
@@ -9,22 +9,60 @@ on:
       - main
 
 jobs:
-  test:
+  format:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
           go-version: "^1.20"
+      - name: Run gofmt
+        working-directory: ./backend
+        run: gofmt -l .
 
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "^1.20"
+      - name: Install golangci-lint
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.54.2
+      - name: Run golangci-lint
+        working-directory: ./backend
+        run: golangci-lint run
+
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "^1.20"
       - name: Install dependencies
         working-directory: ./backend
         run: go mod tidy
-
       - name: Run tests
         working-directory: ./backend/logic
         run: go test
+
+  check-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "^1.20"
+      - name: Build project
+        working-directory: ./backend
+        run: go build -o output
