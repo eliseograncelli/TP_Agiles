@@ -36,7 +36,10 @@ jobs:
           curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.54.2
       - name: Run golangci-lint
         working-directory: ./backend
-        run: golangci-lint run --config ./backend/.golangci.yml .
+
+        run: |
+          cd backend
+          golangci-lint run
 
   unit-test:
     runs-on: ubuntu-latest
