@@ -20,11 +20,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
-      - name: "Cd into Frontend"
-        run: cd frontend
       - name: Install
+        working-directory: ./frontend
         run: pnpm install --frozen-lockfile
       - name: Format
+        working-directory: ./frontend
         run: pnpm format
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -94,9 +94,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
-      - name: "Cd into Frontend"
-        run: cd frontend
       - name: Install dependencies
+        working-directory: ./frontend
         run: pnpm install
       - name: Run Tests
+        working-directory: ./frontend
         run: pnpm test:ci
