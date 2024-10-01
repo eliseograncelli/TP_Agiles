@@ -1,0 +1,21 @@
+linters:
+  enable:
+    - govet
+    - golint
+    - errcheck
+    - unused
+    - staticcheck
+    - gocritic
+    - structcheck
+
+issues:
+  exclude-use-default: false
+
+run:
+  deadline: 2m
+  skip-dirs:
+    - vendor
+    - internal/* # Exclude all directories under internal
+
+output:
+  format: colored-line-number
