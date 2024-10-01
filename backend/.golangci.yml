@@ -1,0 +1,16 @@
+linters:
+  enable:
+    - gofmt
+    - golint
+    - govet
+  disable:
+    - unused # Example of disabling a linter
+
+run:
+  timeout: 5m
+
+# Exclude specific paths or files
+issues:
+  exclude-rules:
+    - path: "internal/**"
+      text: ".*" # This will ignore all issues in the internal directory
