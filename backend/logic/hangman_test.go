@@ -110,3 +110,27 @@ func Test_encode_guest_duplicated_letter(t *testing.T) {
 		t.Fatal()
 	}
 }
+
+func Test_guess_word_win(t *testing.T) {
+	s := CreateGame("hola")
+	res := s.GuessWord("hola")
+	if res != Won_Game {
+		t.Fatal()
+	}
+}
+
+func Test_guess_word_loss(t *testing.T) {
+	s := CreateGame("hola")
+	res := s.GuessWord("algo")
+	if res != Loss_Game {
+		t.Fatal()
+	}
+}
+
+func Test_guess_word_loss_substract_lives(t *testing.T) {
+	s := CreateGame("hola")
+	s.GuessWord("algo")
+	if s.lives != 0 {
+		t.Fatal()
+	}
+}
