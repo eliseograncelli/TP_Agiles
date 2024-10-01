@@ -22,6 +22,8 @@ const (
 	Repited_Letter GameResponse = iota
 	Correct_Letter
 	Wrong_Letter
+	Won_Game
+	Loss_Game
 )
 
 func (state *GameState) encodeWord() string {
@@ -64,4 +66,12 @@ func (state *GameState) guessLetter(letter rune) GameResponse {
 		return Wrong_Letter
 	}
 
+}
+
+func (state *GameState) GuessWord(guess string) GameResponse {
+	if state.word == guess {
+		return Won_Game
+	}
+	state.lives = 0
+	return Loss_Game
 }
