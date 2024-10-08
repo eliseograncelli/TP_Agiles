@@ -4,14 +4,14 @@ import "strings"
 
 type GameState struct {
 	Lives       int
-	Word        string
+	word        string
 	UsedLetters []rune
 }
 
 func CreateGame(word string) GameState {
 	return GameState{
 		Lives:       7,
-		Word:        word,
+		word:        word,
 		UsedLetters: []rune{},
 	}
 }
@@ -26,13 +26,13 @@ const (
 	Loss_Game
 )
 
-func (state *GameState) encodeWord() string {
-	length := len(state.Word)
+func (state *GameState) EncodeWord() string {
+	length := len(state.word)
 
 	buffer := []byte(strings.Repeat("#", length))
 
 	for _, guessed := range state.UsedLetters {
-		for i, letter_in_word := range state.Word {
+		for i, letter_in_word := range state.word {
 			if guessed == letter_in_word {
 				buffer[i] = byte(guessed)
 			}
@@ -42,7 +42,7 @@ func (state *GameState) encodeWord() string {
 	return string(buffer)
 }
 
-func (state *GameState) guessLetter(letter rune) GameResponse {
+func (state *GameState) GuessLetter(letter rune) GameResponse {
 
 	//TODO: caracters invalidos
 	for _, v := range state.UsedLetters {
@@ -54,7 +54,7 @@ func (state *GameState) guessLetter(letter rune) GameResponse {
 	state.UsedLetters = append(state.UsedLetters, letter)
 
 	found := false
-	for _, v := range state.Word {
+	for _, v := range state.word {
 		if v == letter {
 			found = true
 		}
@@ -69,7 +69,7 @@ func (state *GameState) guessLetter(letter rune) GameResponse {
 }
 
 func (state *GameState) GuessWord(guess string) GameResponse {
-	if state.Word == guess {
+	if state.word == guess {
 		return Won_Game
 	}
 	state.Lives = 0

@@ -13,13 +13,12 @@ type RequestBody_CreateGame struct {
 // Start Game
 // @Summary      Recives a word a start a game
 // @Description  Responds with the slug to the newly started game.
-// @Tags         game
 // @Produce      json
 // @Success      200  {string} string slug
 // @Router       /start [post]
 // @Param word body RequestBody_CreateGame true "Secret Word"
 // @Success 200 {string} string "Game slug (identifier)"
-func Start(c *gin.Context) {
+func start(c *gin.Context) {
 
 	//TODO: validate word
 	//TODO: return slug
@@ -32,10 +31,10 @@ func Start(c *gin.Context) {
 		return
 	}
 
-	s := logic.CreateGame(requestBody.Word)
+	logic.CreateGame(requestBody.Word)
 
 	c.JSON(200, gin.H{
-		"message": s.Lives,
+		"ok": true,
 	})
 }
 
@@ -43,7 +42,7 @@ func SetUpServer() *gin.Engine {
 
 	r := gin.Default()
 
-	r.POST("/start", Start)
+	r.POST("/start", start)
 
 	return r
 }
