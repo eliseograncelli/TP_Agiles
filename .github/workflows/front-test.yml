@@ -93,4 +93,4 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Run Tests
-        run: pnpm test:ci
+        run: pnpm test:unit
