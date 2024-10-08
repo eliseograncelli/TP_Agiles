@@ -7,9 +7,6 @@ on:
 
 jobs:
   format:
-    defaults:
-      run:
-        working-directory: ./frontend
     runs-on: ubuntu-22.04
     strategy:
       matrix:
@@ -26,8 +23,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
       - name: Install
+        working-directory: ./frontend
         run: pnpm install --frozen-lockfile
       - name: Format
+        working-directory: ./frontend
         run: pnpm format
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
