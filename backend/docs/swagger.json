@@ -1,0 +1,65 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "An api to play the famous Hangman game of guessing words.",
+        "title": "Hangman API",
+        "contact": {
+            "name": "Bruno Mollo",
+            "url": "https://github.com/BrunoMollo"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "TODO:add"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api",
+    "paths": {
+        "/start": {
+            "post": {
+                "description": "Responds with the slug to the newly started game.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "game"
+                ],
+                "summary": "Recives a word a start a game",
+                "parameters": [
+                    {
+                        "description": "Secret Word",
+                        "name": "word",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.RequestBody_CreateGame"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Game slug (identifier)",
+                        "schema": {
+                            "type": "Response_CreateGame"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "api.RequestBody_CreateGame": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "secret"
+                }
+            }
+        }
+    }
+}

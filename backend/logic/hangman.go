@@ -3,16 +3,16 @@ package logic
 import "strings"
 
 type GameState struct {
-	lives       int
+	Lives       int
 	word        string
-	usedLetters []rune
+	UsedLetters []rune
 }
 
 func CreateGame(word string) GameState {
 	return GameState{
-		lives:       7,
+		Lives:       7,
 		word:        word,
-		usedLetters: []rune{},
+		UsedLetters: []rune{},
 	}
 }
 
@@ -26,12 +26,12 @@ const (
 	Loss_Game
 )
 
-func (state *GameState) encodeWord() string {
+func (state *GameState) EncodeWord() string {
 	length := len(state.word)
 
 	buffer := []byte(strings.Repeat("#", length))
 
-	for _, guessed := range state.usedLetters {
+	for _, guessed := range state.UsedLetters {
 		for i, letter_in_word := range state.word {
 			if guessed == letter_in_word {
 				buffer[i] = byte(guessed)
@@ -42,16 +42,16 @@ func (state *GameState) encodeWord() string {
 	return string(buffer)
 }
 
-func (state *GameState) guessLetter(letter rune) GameResponse {
+func (state *GameState) GuessLetter(letter rune) GameResponse {
 
 	//TODO: caracters invalidos
-	for _, v := range state.usedLetters {
+	for _, v := range state.UsedLetters {
 		if v == letter {
 			return Repited_Letter
 		}
 	}
 
-	state.usedLetters = append(state.usedLetters, letter)
+	state.UsedLetters = append(state.UsedLetters, letter)
 
 	found := false
 	for _, v := range state.word {
@@ -62,7 +62,7 @@ func (state *GameState) guessLetter(letter rune) GameResponse {
 	if found {
 		return Correct_Letter
 	} else {
-		state.lives -= 1
+		state.Lives -= 1
 		return Wrong_Letter
 	}
 
@@ -72,6 +72,6 @@ func (state *GameState) GuessWord(guess string) GameResponse {
 	if state.word == guess {
 		return Won_Game
 	}
-	state.lives = 0
+	state.Lives = 0
 	return Loss_Game
 }

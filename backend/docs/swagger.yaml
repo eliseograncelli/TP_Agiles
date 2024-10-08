@@ -1,0 +1,43 @@
+basePath: /api
+definitions:
+  api.RequestBody_CreateGame:
+    properties:
+      name:
+        example: secret
+        type: string
+    required:
+    - name
+    type: object
+host: localhost:8080
+info:
+  contact:
+    name: Bruno Mollo
+    url: https://github.com/BrunoMollo
+  description: An api to play the famous Hangman game of guessing words.
+  license:
+    name: MIT
+    url: TODO:add
+  title: Hangman API
+  version: "1.0"
+paths:
+  /start:
+    post:
+      description: Responds with the slug to the newly started game.
+      parameters:
+      - description: Secret Word
+        in: body
+        name: word
+        required: true
+        schema:
+          $ref: '#/definitions/api.RequestBody_CreateGame'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Game slug (identifier)
+          schema:
+            type: Response_CreateGame
+      summary: Recives a word a start a game
+      tags:
+      - game
+swagger: "2.0"

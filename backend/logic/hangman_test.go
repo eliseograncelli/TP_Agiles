@@ -7,13 +7,13 @@ import (
 func TestCreateGame(t *testing.T) {
 	s := CreateGame("hola")
 
-	if s.lives != 7 {
+	if s.Lives != 7 {
 		t.Fatalf("Wrong lives")
 	}
-	if s.word != "hola" {
+	if s.Word != "hola" {
 		t.Fatalf("Wrong word")
 	}
-	if len(s.usedLetters) != 0 {
+	if len(s.UsedLetters) != 0 {
 		t.Fatalf("Wrong usedLetters")
 	}
 }
@@ -46,7 +46,7 @@ func TestGuessWrongLetter(t *testing.T) {
 	if res != Wrong_Letter {
 		t.Fatalf("Didn't fail")
 	}
-	if s.lives != 6 {
+	if s.Lives != 6 {
 		t.Fatalf("Dind't substract live")
 	}
 }
@@ -130,7 +130,7 @@ func Test_guess_word_loss(t *testing.T) {
 func Test_guess_word_loss_substract_lives(t *testing.T) {
 	s := CreateGame("hola")
 	s.GuessWord("algo")
-	if s.lives != 0 {
+	if s.Lives != 0 {
 		t.Fatal()
 	}
 }
