@@ -31,8 +31,9 @@ export function createGameState(api: Api) {
 		});
 	}
 
-	function guessesWord(_word: string) {
+	function guessesWord(word: string) {
 		//TODO:implement
+		console.log(word);
 	}
 
 	return {
