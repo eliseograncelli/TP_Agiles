@@ -11,9 +11,10 @@ function delay<const T>(res: T, miliseconds: number) {
 export class MockApi implements Api {
 	constructor(private secret: string) {}
 
-	guessesLetter(letter: string) {
+	async guessesLetter(letter: string) {
 		if (this.secret.includes(letter)) {
-			return delay({ status: 'match', encodedWord: '####' }, 100);
+			const encodedWord = await this.getEncodedWord();
+			return delay({ status: 'match', encodedWord }, 100);
 		}
 		return delay({ status: 'miss' }, 100);
 	}
