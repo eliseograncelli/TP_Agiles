@@ -26,7 +26,7 @@ const (
 	Loss_Game
 )
 
-func (state *GameState) encodeWord() string {
+func (state *GameState) EncodeWord() string {
 	length := len(state.word)
 
 	buffer := []byte(strings.Repeat("#", length))
