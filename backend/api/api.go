@@ -1,14 +1,35 @@
 package api
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"utn.com/utn/logic"
 	"utn.com/utn/peristance"
 )
 
+func CORSMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*") // Replace "*" with specific domain for security
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+
+		// Handle preflight request
+		if c.Request.Method == http.MethodOptions {
+			c.AbortWithStatus(http.StatusNoContent)
+			return
+		}
+
+		c.Next()
+	}
+}
+
 func SetUpServer(repo peristance.GameRepository) {
 
 	r := gin.Default()
+
+	r.Use(CORSMiddleware())
 
 	r.GET("/healthcheck", func(c *gin.Context) {
 		c.JSON(200, gin.H{
@@ -38,7 +59,7 @@ func SetUpServer(repo peristance.GameRepository) {
 	})
 
 	r.GET("/get-game/:id", func(c *gin.Context) {
-		id:= c.Param("id")	
+		id := c.Param("id")
 		game := repo.GetOne(id)
 
 		c.JSON(200, gin.H{
