@@ -10,15 +10,26 @@ func SetUpServer(repo peristance.GameRepository) {
 
 	r := gin.Default()
 
-	r.GET("/helthcheck", func(c *gin.Context) {
+	r.GET("/healthcheck", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "Hola Mundo",
 		})
 	})
 
+	type RequestCreateGame struct {
+		Word string `json:"word"`
+	}
+
 	r.POST("/create-game", func(c *gin.Context) {
-		word := "hola" //TODO: get form request
-		game := logic.CreateGame(word)
+		var data RequestCreateGame
+
+		err := c.ShouldBindJSON(&data)
+		if err != nil {
+			c.JSON(400, gin.H{"error": err.Error()})
+			return
+		}
+
+		game := logic.CreateGame(data.Word)
 		id := repo.Save(game)
 
 		c.JSON(200, gin.H{
@@ -26,8 +37,8 @@ func SetUpServer(repo peristance.GameRepository) {
 		})
 	})
 
-	r.GET("/get-game", func(c *gin.Context) {
-		id := "2"
+	r.GET("/get-game/:id", func(c *gin.Context) {
+		id:= c.Param("id")	
 		game := repo.GetOne(id)
 
 		c.JSON(200, gin.H{
