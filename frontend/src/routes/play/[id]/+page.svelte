@@ -8,10 +8,8 @@
 	const gameId = $page.params.id;
 
 	const api = new MockApi('chupame esta wachin');
-	const { stores, actions } = createGameState(api);
 
-	let game: any;
-	api.getGame(gameId).then((x) => (game = x));
+	const { stores, actions } = createGameState(api, gameId);
 
 	const { loading, lives, guesses, word } = stores;
 	const { guessesLetter, guessesWord } = actions;
@@ -53,7 +51,6 @@
 		</div>
 	</section>
 </div>
-<pre>{JSON.stringify(game)}</pre>
 
 <style>
 	.form {

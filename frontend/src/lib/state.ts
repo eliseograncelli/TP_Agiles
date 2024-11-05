@@ -5,13 +5,12 @@ export type GuessesLetterResponse = { status: 'match'; encodedWord: string } | {
 export interface Api {
 	getGame(id: string): Promise<{ encode: string }>;
 	guessesLetter(letter: string): Promise<GuessesLetterResponse>;
-	getEncodedWord(): Promise<string>;
 }
 
-export function createGameState(api: Api) {
+export function createGameState(api: Api, gameId: string) {
 	const word = writable('');
-	api.getEncodedWord().then((encoded) => {
-		word.set(encoded);
+	api.getGame(gameId).then((game) => {
+		word.set(game.encode);
 	});
 
 	const loading = writable(false);
