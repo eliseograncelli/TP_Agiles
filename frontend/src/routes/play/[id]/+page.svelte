@@ -3,9 +3,15 @@
 	import Hangman from '$lib/hangman.svelte';
 	import { MockApi } from '$lib/mock-api';
 	import { createGameState } from '$lib/state';
+	import { page } from '$app/stores';
+
+	const gameId = $page.params.id;
 
 	const api = new MockApi('chupame esta wachin');
 	const { stores, actions } = createGameState(api);
+
+	let game: any;
+	api.getGame(gameId).then((x) => (game = x));
 
 	const { loading, lives, guesses, word } = stores;
 	const { guessesLetter, guessesWord } = actions;
@@ -47,6 +53,7 @@
 		</div>
 	</section>
 </div>
+<pre>{JSON.stringify(game)}</pre>
 
 <style>
 	.form {

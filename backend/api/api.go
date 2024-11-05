@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -62,6 +63,7 @@ func SetUpServer(repo peristance.GameRepository) {
 		id := c.Param("id")
 		game := repo.GetOne(id)
 
+		fmt.Printf("game: %v\n", game)
 		c.JSON(200, gin.H{
 			"id":     id,
 			"encode": game.EncodeWord(),

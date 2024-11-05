@@ -3,6 +3,7 @@ import { readonly, writable } from 'svelte/store';
 export type GuessesLetterResponse = { status: 'match'; encodedWord: string } | { status: 'miss' };
 
 export interface Api {
+	getGame(id: string): Promise<{ encode: string }>;
 	guessesLetter(letter: string): Promise<GuessesLetterResponse>;
 	getEncodedWord(): Promise<string>;
 }
