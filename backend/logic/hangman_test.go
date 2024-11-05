@@ -21,7 +21,7 @@ func TestCreateGame(t *testing.T) {
 func TestGuessCorrectLetter(t *testing.T) {
 	s := CreateGame("hola")
 
-	res := s.guessLetter('l')
+	res := s.GuessLetter('l')
 	if res != Correct_Letter {
 		t.Fatalf("Didn't matched letter 'L'")
 	}
@@ -30,8 +30,8 @@ func TestGuessCorrectLetter(t *testing.T) {
 func TestGuessCorrectLetterTwice(t *testing.T) {
 	s := CreateGame("hola")
 
-	s.guessLetter('l')
-	res := s.guessLetter('l')
+	s.GuessLetter('l')
+	res := s.GuessLetter('l')
 
 	if res != Repited_Letter {
 		t.Fatalf("Didn't realized that 'L' was guest twice")
@@ -42,7 +42,7 @@ func TestGuessCorrectLetterTwice(t *testing.T) {
 func TestGuessWrongLetter(t *testing.T) {
 	s := CreateGame("hola")
 
-	res := s.guessLetter('z')
+	res := s.GuessLetter('z')
 	if res != Wrong_Letter {
 		t.Fatalf("Didn't fail")
 	}
@@ -53,7 +53,7 @@ func TestGuessWrongLetter(t *testing.T) {
 
 func Test_encode_word_all_empty_4(t *testing.T) {
 	s := CreateGame("hola")
-	res := s.encodeWord()
+	res := s.EncodeWord()
 
 	if res != "####" {
 		t.Fatal()
@@ -62,7 +62,7 @@ func Test_encode_word_all_empty_4(t *testing.T) {
 
 func Test_encode_word_all_empty_6(t *testing.T) {
 	s := CreateGame("buenas")
-	res := s.encodeWord()
+	res := s.EncodeWord()
 
 	if res != "######" {
 		t.Fatal()
@@ -71,8 +71,8 @@ func Test_encode_word_all_empty_6(t *testing.T) {
 
 func Test_encode_first_gussed(t *testing.T) {
 	s := CreateGame("hola")
-	s.guessLetter('h')
-	res := s.encodeWord()
+	s.GuessLetter('h')
+	res := s.EncodeWord()
 
 	if res != "h###" {
 		t.Fatal()
@@ -81,9 +81,9 @@ func Test_encode_first_gussed(t *testing.T) {
 
 func Test_encode_first_gussed_missed_second(t *testing.T) {
 	s := CreateGame("hola")
-	s.guessLetter('h')
-	s.guessLetter('y')
-	res := s.encodeWord()
+	s.GuessLetter('h')
+	s.GuessLetter('y')
+	res := s.EncodeWord()
 
 	if res != "h###" {
 		t.Fatal()
@@ -92,9 +92,9 @@ func Test_encode_first_gussed_missed_second(t *testing.T) {
 
 func Test_encode_first_and_second(t *testing.T) {
 	s := CreateGame("hola")
-	s.guessLetter('h')
-	s.guessLetter('l')
-	res := s.encodeWord()
+	s.GuessLetter('h')
+	s.GuessLetter('l')
+	res := s.EncodeWord()
 
 	if res != "h#l#" {
 		t.Fatal()
@@ -103,8 +103,8 @@ func Test_encode_first_and_second(t *testing.T) {
 
 func Test_encode_guest_duplicated_letter(t *testing.T) {
 	s := CreateGame("perro")
-	s.guessLetter('r')
-	res := s.encodeWord()
+	s.GuessLetter('r')
+	res := s.EncodeWord()
 
 	if res != "##rr#" {
 		t.Fatal()

@@ -42,7 +42,7 @@ func (state *GameState) EncodeWord() string {
 	return string(buffer)
 }
 
-func (state *GameState) guessLetter(letter rune) GameResponse {
+func (state *GameState) GuessLetter(letter rune) GameResponse {
 
 	//TODO: caracters invalidos
 	for _, v := range state.usedLetters {
