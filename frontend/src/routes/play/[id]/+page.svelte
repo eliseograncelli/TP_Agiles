@@ -16,8 +16,8 @@
 
 	let letterGuess: string;
 	async function onLetterGuess() {
-		const aaa=await guessesLetter(letterGuess);
-		console.log(aaa)
+		const aaa = await guessesLetter(letterGuess);
+		console.log(aaa);
 		letterGuess = '';
 	}
 
@@ -36,24 +36,22 @@
 	<section class="side-right">
 		<DisplaySecret encoded={$word} />
 		{#if $playing}
-			
-		<div class="form">
-			<label>
-				<input type="text" maxlength="1" bind:value={letterGuess} />
-				<button disabled={$loading || !letterGuess} on:click={onLetterGuess}>Guess Letter</button>
-			</label>
+			<div class="form">
+				<label>
+					<input type="text" maxlength="1" bind:value={letterGuess} />
+					<button disabled={$loading || !letterGuess} on:click={onLetterGuess}>Guess Letter</button>
+				</label>
 
-			<label>
-				<input type="text" bind:value={wordGuess} />
-				<button disabled={$loading || !wordGuess} on:click={onWordGuess}>Guess Word</button>
-			</label>
+				<label>
+					<input type="text" bind:value={wordGuess} />
+					<button disabled={$loading || !wordGuess} on:click={onWordGuess}>Guess Word</button>
+				</label>
 
-			<span>
-				<strong>Guesses: </strong>{$guesses.join(', ')}
-			</span>
-		</div>
+				<span>
+					<strong>Guesses: </strong>{$guesses.join(', ')}
+				</span>
+			</div>
 		{/if}
-
 	</section>
 </div>
 
