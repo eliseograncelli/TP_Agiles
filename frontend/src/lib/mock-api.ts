@@ -11,7 +11,7 @@ type GameResponse =
   | { type: "repeated-letter" }
   | { type: "correct"; encoded: string }
   | { type: "wrong"; lives: number }
-  | { type: "won" }
+  | { type: "won"; encoded: string }
   | { type: "loss" };
 
 

@@ -76,6 +76,9 @@ func (state *GameState) GuessLetter(letter rune) GameResponse {
 		return Correct_Letter
 	} else {
 		state.lives -= 1
+		if state.lives == 0 {
+			return Loss_Game
+		}
 		return Wrong_Letter
 	}
 

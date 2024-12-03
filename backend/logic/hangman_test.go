@@ -146,3 +146,18 @@ func Test_Won_By_Guessing_letter(t *testing.T) {
 		t.Fatal()
 	}
 }
+
+func Test_Loss_By_Guessing_letter(t *testing.T) {
+	s := CreateGame("zzzz")
+	s.GuessLetter('a')
+	s.GuessLetter('b')
+	s.GuessLetter('c')
+	s.GuessLetter('d')
+	s.GuessLetter('e')
+	s.GuessLetter('f')
+	res := s.GuessLetter('g')
+
+	if res != Loss_Game {
+		t.Fatal()
+	}
+}

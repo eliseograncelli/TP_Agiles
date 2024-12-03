@@ -11,7 +11,7 @@
 
 	const { stores, actions } = createGameState(api, gameId);
 
-	const { loading, lives, guesses, word } = stores;
+	const { loading, lives, guesses, word, playing } = stores;
 	const { guessesLetter, guessesWord } = actions;
 
 	let letterGuess: string;
@@ -35,6 +35,8 @@
 	</section>
 	<section class="side-right">
 		<DisplaySecret encoded={$word} />
+		{#if $playing}
+			
 		<div class="form">
 			<label>
 				<input type="text" maxlength="1" bind:value={letterGuess} />
@@ -50,6 +52,8 @@
 				<strong>Guesses: </strong>{$guesses.join(', ')}
 			</span>
 		</div>
+		{/if}
+
 	</section>
 </div>
 

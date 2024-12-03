@@ -106,7 +106,8 @@ func SetUpServer(repo peristance.GameRepository) {
 			})
 		case logic.Won_Game:
 			c.JSON(200, gin.H{
-				"type": "won",
+				"type":    "won",
+				"encoded": game.EncodeWord(),
 			})
 		case logic.Loss_Game:
 			c.JSON(200, gin.H{

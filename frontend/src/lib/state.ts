@@ -11,6 +11,7 @@ export function createGameState(api: Api, gameId: string) {
 
 	const loading = writable(false);
 	const lives = writable(7);
+	const playing = writable(true);
 	const guesses = writable([] as string[]);
 
 	async function guessesLetter(letter: string) {
@@ -30,10 +31,14 @@ export function createGameState(api: Api, gameId: string) {
 				lives.set(res.lives)
 				break
 			case 'won':
-				alert("Ganaste")
+				word.set(res.encoded)
+				playing.set(false)
+				setTimeout(()=>alert("Ganaste"), 20)
 				break
 			case 'loss':
-				alert("Peridate")
+				playing.set(false)
+				lives.set(0)
+				setTimeout(()=>alert("Perdiste"), 20)
 				break
 		}
 
@@ -47,12 +52,14 @@ export function createGameState(api: Api, gameId: string) {
 		console.log(word);
 	}
 
+
 	return {
 		stores: {
 			loading: readonly(loading),
 			lives: readonly(lives),
 			guesses: readonly(guesses),
-			word: readonly(word)
+			word: readonly(word),
+			playing:readonly(playing)
 		},
 		actions: { guessesLetter, guessesWord }
 	};
