@@ -1,5 +1,5 @@
 <script lang="ts">
-	let word: string;
+	let secret: string;
 	let url: string;
 	let base_url: string = 'localhost:5173/play/';
 
@@ -7,7 +7,7 @@
 		fetch('http://localhost:8000/create-game', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ word })
+			body: JSON.stringify({ word: 'hola' })
 		})
 			.then((response) => response.json())
 			.then((data) => {
@@ -20,6 +20,6 @@
 {#if url}
 	<p>url: {url}</p>
 {:else}
-	<input type="text" bind:value={word} />
+	<input type="text" bind:value={secret} />
 	<button on:click={onCreateGame}>Create Game</button>
 {/if}
