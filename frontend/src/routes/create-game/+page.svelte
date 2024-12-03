@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { FRONT_URL } from '$env/static/public';
+
 	let word: string;
 	let url: string;
-	let base_url: string = 'http://localhost:5173/play/';
+	let base_url: string = PUBLIC_FRONT_URL + '/play/';
 
 	function onCreateGame() {
 		fetch('http://localhost:8000/create-game', {
