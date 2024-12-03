@@ -4,6 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
+		"build": "vite build",
 		"dev:all": "concurrently --kill-others -n \"svelte,golang\" -c \"red.bold,blue.bold\" \"vite dev\" \"cd ../backend/ && air\"",
 		"preview": "vite preview",
 		"test": "npm run test:integration && npm run test:unit",
