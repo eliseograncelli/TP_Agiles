@@ -1,13 +1,13 @@
 <script lang="ts">
 	import DisplaySecret from '$lib/display-secret.svelte';
 	import Hangman from '$lib/hangman.svelte';
-	import { MockApi } from '$lib/mock-api';
+	import { Api } from '$lib/mock-api';
 	import { createGameState } from '$lib/state';
 	import { page } from '$app/stores';
 
 	const gameId = $page.params.id;
 
-	const api = new MockApi('chupame esta wachin');
+	const api = new Api(gameId);
 
 	const { stores, actions } = createGameState(api, gameId);
 
@@ -15,8 +15,9 @@
 	const { guessesLetter, guessesWord } = actions;
 
 	let letterGuess: string;
-	function onLetterGuess() {
-		guessesLetter(letterGuess);
+	async function onLetterGuess() {
+		const aaa=await guessesLetter(letterGuess);
+		console.log(aaa)
 		letterGuess = '';
 	}
 

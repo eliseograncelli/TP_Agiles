@@ -134,3 +134,15 @@ func Test_guess_word_loss_substract_lives(t *testing.T) {
 		t.Fatal()
 	}
 }
+
+func Test_Won_By_Guessing_letter(t *testing.T) {
+	s := CreateGame("hola")
+	s.GuessLetter('o')
+	s.GuessLetter('h')
+	s.GuessLetter('l')
+
+	res := s.GuessLetter('a')
+	if res != Won_Game {
+		t.Fatal()
+	}
+}

@@ -13,6 +13,7 @@ type GameState = logic.GameState
 type GameRepository interface {
 	Save(game GameState) string
 	GetOne(id string) GameState
+	Update(id string, game GameState)
 }
 
 func InitGameRepository() GameRepository {
@@ -36,4 +37,8 @@ func (db *DataBase) Save(game GameState) string {
 
 func (g *DataBase) GetOne(id string) GameState {
 	return g.internaMap[id]
+}
+
+func (db *DataBase) Update(id string, game GameState) {
+	db.internaMap[id] = game
 }

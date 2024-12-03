@@ -26,6 +26,16 @@ const (
 	Loss_Game
 )
 
+func (state *GameState) wonGame() bool {
+	count := 0
+	for _, c := range state.EncodeWord() {
+		if c == '#' {
+			count++
+		}
+	}
+	return count == 0
+}
+
 func (state *GameState) EncodeWord() string {
 	length := len(state.word)
 
@@ -60,6 +70,9 @@ func (state *GameState) GuessLetter(letter rune) GameResponse {
 		}
 	}
 	if found {
+		if state.wonGame() {
+			return Won_Game
+		}
 		return Correct_Letter
 	} else {
 		state.lives -= 1

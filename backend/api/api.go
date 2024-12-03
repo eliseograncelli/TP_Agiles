@@ -87,6 +87,7 @@ func SetUpServer(repo peristance.GameRepository) {
 		fmt.Printf("data: %v\n", data)
 		game := repo.GetOne(data.GameId)
 		res := game.GuessLetter(data.Letter)
+		repo.Update(data.GameId, game)
 
 		switch res {
 		case logic.Repited_Letter:

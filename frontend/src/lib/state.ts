@@ -1,11 +1,7 @@
 import { readonly, writable } from 'svelte/store';
+import type { Api } from './mock-api';
 
-export type GuessesLetterResponse = { status: 'match'; encodedWord: string } | { status: 'miss' };
 
-export interface Api {
-	getGame(id: string): Promise<{ encode: string }>;
-	guessesLetter(letter: string): Promise<GuessesLetterResponse>;
-}
 
 export function createGameState(api: Api, gameId: string) {
 	const word = writable('');
@@ -17,18 +13,33 @@ export function createGameState(api: Api, gameId: string) {
 	const lives = writable(7);
 	const guesses = writable([] as string[]);
 
-	function guessesLetter(letter: string) {
+	async function guessesLetter(letter: string) {
 		guesses.update((g) => [...g, letter]);
 		loading.set(true);
 
-		api.guessesLetter(letter).then((res) => {
-			if (res.status === 'miss') {
-				lives.update((l) => l - 1);
-			} else {
-				word.set(res.encodedWord);
-			}
-			loading.set(false);
-		});
+		const res= await api.guessesLetter(letter)
+		
+		switch(res.type){
+			case 'repeated-letter':
+				alert("Letra repetida")
+				break
+			case 'correct':
+				word.set(res.encoded)
+				break
+			case 'wrong':
+				lives.set(res.lives)
+				break
+			case 'won':
+				alert("Ganaste")
+				break
+			case 'loss':
+				alert("Peridate")
+				break
+		}
+
+		loading.set(false);
+
+
 	}
 
 	function guessesWord(word: string) {

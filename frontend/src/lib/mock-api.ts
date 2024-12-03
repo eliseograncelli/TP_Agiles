@@ -1,4 +1,3 @@
-import type { Api } from './state';
 
 function delay<const T>(res: T, miliseconds: number) {
 	return new Promise<T>((resolve) => {
@@ -8,8 +7,16 @@ function delay<const T>(res: T, miliseconds: number) {
 	});
 }
 
-export class MockApi implements Api {
-	constructor(private secret: string) {}
+type GameResponse = 
+  | { type: "repeated-letter" }
+  | { type: "correct"; encoded: string }
+  | { type: "wrong"; lives: number }
+  | { type: "won" }
+  | { type: "loss" };
+
+
+export class Api {
+	constructor(private gameId:string) {}
 
 	async getGame(id: string): Promise<{ encode: string }> {
 		const res = await fetch(`http://localhost:8000/get-game/${id}`);
@@ -17,16 +24,17 @@ export class MockApi implements Api {
 	}
 
 	async guessesLetter(letter: string) {
-		if (this.secret.includes(letter)) {
-			const encodedWord = await this.getEncodedWord();
-			return delay({ status: 'match', encodedWord }, 100);
-		}
-		return delay({ status: 'miss' }, 100);
+		const res=await fetch("http://localhost:8000/guess-letter",{
+			method:"POST",
+			body:JSON.stringify({gameId:this.gameId, letter:letter.charCodeAt(0)})
+		}).then(x=>x.json()) as GameResponse
+		
+		return res 
 	}
 
-	async getEncodedWord() {
-		const { length } = this.secret;
-		const encoded = String('#').repeat(length);
-		return delay(encoded, 100);
-	}
+	// async getEncodedWord() {
+	// 	const { length } = this.secret;
+	// 	const encoded = String('#').repeat(length);
+	// 	return delay(encoded, 100);
+	// }
 }
