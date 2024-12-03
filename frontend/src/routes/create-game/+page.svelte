@@ -1,7 +1,7 @@
 <script lang="ts">
 	let word: string;
 	let url: string;
-	let base_url: string = 'localhost:5173/play/';
+	let base_url: string = 'http://localhost:5173/play/';
 
 	function onCreateGame() {
 		fetch('http://localhost:8000/create-game', {
