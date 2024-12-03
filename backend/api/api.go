@@ -70,6 +70,51 @@ func SetUpServer(repo peristance.GameRepository) {
 		})
 	})
 
+	type RequestGuessLetter struct {
+		GameId string `json:"gameId"`
+		Letter rune   `json:"letter"`
+	}
+
+	r.POST("/guess-letter", func(c *gin.Context) {
+		var data RequestGuessLetter
+
+		err := c.ShouldBindJSON(&data)
+		if err != nil {
+			c.JSON(400, gin.H{"error": err.Error()})
+			return
+		}
+
+		fmt.Printf("data: %v\n", data)
+		game := repo.GetOne(data.GameId)
+		res := game.GuessLetter(data.Letter)
+
+		switch res {
+		case logic.Repited_Letter:
+			c.JSON(200, gin.H{
+				"type": "repeated-letter",
+			})
+		case logic.Correct_Letter:
+			c.JSON(200, gin.H{
+				"type":    "correct",
+				"encoded": game.EncodeWord(),
+			})
+		case logic.Wrong_Letter:
+			c.JSON(200, gin.H{
+				"type":  "wrong",
+				"lives": game.GetLives(),
+			})
+		case logic.Won_Game:
+			c.JSON(200, gin.H{
+				"type": "won",
+			})
+		case logic.Loss_Game:
+			c.JSON(200, gin.H{
+				"type": "loss",
+			})
+		}
+
+	})
+
 	r.Run(":8000")
 
 }

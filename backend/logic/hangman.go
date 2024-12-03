@@ -75,3 +75,7 @@ func (state *GameState) GuessWord(guess string) GameResponse {
 	state.lives = 0
 	return Loss_Game
 }
+
+func (state *GameState) GetLives() int {
+	return state.lives
+}
