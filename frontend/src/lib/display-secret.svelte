@@ -6,7 +6,7 @@
 	{#each encoded.toUpperCase() as letter, i}
 		{@const test_id = `letter-${i}`}
 		{#if letter === '#'}
-			<span data-testid={test_id}>_</span>
+			<span data-testid={test_id} class="dash">_</span>
 		{:else}
 			<span data-testid={test_id}>{letter}</span>
 		{/if}

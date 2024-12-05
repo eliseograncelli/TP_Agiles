@@ -1,7 +1,7 @@
 <script lang="ts">
 	import DisplaySecret from '$lib/display-secret.svelte';
 	import Hangman from '$lib/hangman.svelte';
-	import { Api } from '$lib/mock-api';
+	import { Api } from '$lib/api';
 	import { createGameState } from '$lib/state';
 	import { page } from '$app/stores';
 
@@ -9,7 +9,7 @@
 
 	const api = new Api(gameId);
 
-	const { stores, actions } = createGameState(api, gameId);
+	const { stores, actions } = createGameState(api);
 
 	const { loading, lives, guesses, word, playing } = stores;
 	const { guessesLetter, guessesWord } = actions;
