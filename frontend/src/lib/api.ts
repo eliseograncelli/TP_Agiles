@@ -11,7 +11,7 @@ const baseUrl = `${location.protocol}//${location.host}/`;
 
 export class Api {
 	static async createGame(word: string, opts: { baseUrl?: string } = { baseUrl }) {
-		return fetch('http://localhost:8000/create-game', {
+		return fetch(`${PUBLIC_BACKEND_URL}/create-game`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ word })
@@ -29,7 +29,7 @@ export class Api {
 	constructor(private gameId: string) {}
 
 	async getGame(): Promise<{ encode: string }> {
-		const res = await fetch(`${PUBLIC_BACKEND_URL}/get-game${this.gameId}`);
+		const res = await fetch(`${PUBLIC_BACKEND_URL}/get-game/${this.gameId}`);
 		return await res.json();
 	}
 
