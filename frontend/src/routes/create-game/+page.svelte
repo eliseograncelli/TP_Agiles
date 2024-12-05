@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { FRONT_URL } from '$env/static/public';
+	import { PUBLIC_FRONT_URL } from '$env/static/public';
 
 	let word: string;
 	let url: string;

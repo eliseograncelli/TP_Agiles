@@ -16,8 +16,8 @@ type GameResponse =
 export class Api {
 	constructor(private gameId: string) {}
 
-	async getGame(id: string): Promise<{ encode: string }> {
-		const res = await fetch(`http://localhost:8000/get-game/${id}`);
+	async getGame(): Promise<{ encode: string }> {
+		const res = await fetch(`http://localhost:8000/get-game/${this.gameId}`);
 		return await res.json();
 	}
 

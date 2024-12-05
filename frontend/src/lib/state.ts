@@ -1,9 +1,9 @@
 import { readonly, writable } from 'svelte/store';
 import type { Api } from './api';
 
-export function createGameState(api: Api, gameId: string) {
+export function createGameState(api: Api) {
 	const word = writable('');
-	api.getGame(gameId).then((game) => {
+	api.getGame().then((game) => {
 		word.set(game.encode);
 	});
 

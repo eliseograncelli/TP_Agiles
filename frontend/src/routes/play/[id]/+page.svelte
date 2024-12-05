@@ -9,7 +9,7 @@
 
 	const api = new Api(gameId);
 
-	const { stores, actions } = createGameState(api, gameId);
+	const { stores, actions } = createGameState(api);
 
 	const { loading, lives, guesses, word, playing } = stores;
 	const { guessesLetter, guessesWord } = actions;
