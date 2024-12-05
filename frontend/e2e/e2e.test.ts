@@ -16,6 +16,7 @@ test('Iniciar partida', async ({ page }) => {
 
 	//Then: al hacer click debería ver la pantalla de juego con la palabra oculta
 	await Promise.allSettled([anchor.click(), page.waitForResponse((response) => response.ok())]);
+	await page.waitForSelector('.dash', { state: 'visible' });
 	const dashes = await page.locator('.dash').all();
 	expect(dashes.length).toBe(4);
 });
