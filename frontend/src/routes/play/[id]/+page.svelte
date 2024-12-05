@@ -28,7 +28,6 @@
 	}
 </script>
 
-djskaljdsakldjsakl
 <h1>TP AGILES</h1>
 <div class="container">
 	<section class="side-left">
