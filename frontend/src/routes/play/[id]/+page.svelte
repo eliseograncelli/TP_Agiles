@@ -52,7 +52,10 @@
 				</label>
 
 				<span>
-					<strong>Guesses: </strong>{$guesses.join(', ')}
+					<strong>Guesses: </strong>
+					<span id="guesses">
+						{$guesses.join(', ')}
+					</span>
 				</span>
 			</div>
 		{/if}

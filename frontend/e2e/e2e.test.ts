@@ -42,6 +42,9 @@ test('Ingresar letra válida', async ({ page }) => {
 		page.waitForResponse((response) => response.ok())
 	]);
 
+	// Then: debería ver la letra g en la letras arriesgadas
+	expect(await page.locator('#guesses').innerText()).toContain('g');
+
 	// Then: debería ver la letra revelada en la palabra
 	expect(await page.locator('[data-testid="letter-0"]').innerText()).toBe('_');
 	expect(await page.locator('[data-testid="letter-1"]').innerText()).toBe('G');
@@ -60,10 +63,45 @@ test('Ingresar letra válida', async ({ page }) => {
 });
 
 // Scenario: Ingresar letra inválida
-//    Given ingreso la palabra "elefante"
-//    When intento la letra "x"
-//    Then debería ver la letra en la letras incorrectas
-//    Then la cantidad de vidas debería ser "6"
+test('Ingresar letra inválida', async ({ page }) => {
+	// Given: Partida iniciada con la palabra "agil"
+	await page.goto('/create-game');
+	page.locator('input').fill('agil');
+	await Promise.allSettled([
+		page.locator('button').click(),
+		page.waitForResponse((response) => response.ok())
+	]);
+	await Promise.allSettled([
+		page.locator('a').click(),
+		page.waitForResponse((response) => response.ok())
+	]);
+
+	// When: intento la letra "y"
+	page.locator('#letter-input').fill('y');
+	await Promise.allSettled([
+		page.locator('#letter-btn').click(),
+		page.waitForResponse((response) => response.ok())
+	]);
+
+	// Then: debería ver la letra y en la letras arriesgadas
+	expect(await page.locator('#guesses').innerText()).toContain('y');
+
+	// Then: la palabra revelada deberia seguir igual
+	expect(await page.locator('[data-testid="letter-0"]').innerText()).toBe('_');
+	expect(await page.locator('[data-testid="letter-1"]').innerText()).toBe('_');
+	expect(await page.locator('[data-testid="letter-2"]').innerText()).toBe('_');
+	expect(await page.locator('[data-testid="letter-3"]').innerText()).toBe('_');
+
+	// Then: la cantidad de vidas debería ser "6"
+	expect(page.locator('.head')).toBeVisible();
+	expect(page.locator('.body')).not.toBeVisible();
+	expect(page.locator('.left-arm')).not.toBeVisible();
+	expect(page.locator('.right-arm')).not.toBeVisible();
+	expect(page.locator('.left-leg')).not.toBeVisible();
+	expect(page.locator('.right-leg')).not.toBeVisible();
+	expect(page.locator('.cut')).not.toBeVisible();
+	expect(page.locator('.eyes')).not.toBeVisible();
+});
 
 //  Scenario: Arriesgo la palabra correcta
 //    Given ingreso la palabra "elefante"
