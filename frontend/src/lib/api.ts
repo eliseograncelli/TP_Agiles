@@ -1,10 +1,4 @@
-function delay<const T>(res: T, miliseconds: number) {
-	return new Promise<T>((resolve) => {
-		setTimeout(() => {
-			resolve(res);
-		}, miliseconds);
-	});
-}
+import { PUBLIC_BACKEND_URL } from '$env/static/public';
 
 type GameResponse =
 	| { type: 'repeated-letter' }
@@ -14,17 +8,34 @@ type GameResponse =
 	| { type: 'loss' };
 
 export class Api {
+	static async createGame(word: string) {
+		return fetch('http://localhost:8000/create-game', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ word })
+		})
+			.then((response) => response.json())
+			.then((data) => `${PUBLIC_BACKEND_URL}/play/${data.id}`)
+			.catch((error) => {
+				const msj = 'Something went wrong';
+				alert(msj);
+				console.log('Error:', error);
+				return msj;
+			});
+	}
+
 	constructor(private gameId: string) {}
 
 	async getGame(): Promise<{ encode: string }> {
-		const res = await fetch(`http://localhost:8000/get-game/${this.gameId}`);
+		const res = await fetch(`${PUBLIC_BACKEND_URL}/get-game/${this.gameId}`);
 		return await res.json();
 	}
 
 	async guessesLetter(letter: string) {
-		const res = (await fetch('http://localhost:8000/guess-letter', {
+		const payload = { gameId: this.gameId, letter: letter.charCodeAt(0) };
+		const res = (await fetch(`${PUBLIC_BACKEND_URL}/guess-letter`, {
 			method: 'POST',
-			body: JSON.stringify({ gameId: this.gameId, letter: letter.charCodeAt(0) })
+			body: JSON.stringify(payload)
 		}).then((x) => x.json())) as GameResponse;
 
 		return res;

@@ -1,12 +1,11 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
-	use:{
-		headless:false
+	use: {
+		headless: false
 	},
 	webServer: {
-		command: 'pnpm build && pnpm preview && cd ../backend && go build && ./utn',
-		port: 4173
+		command: 'pnpm build && pnpm preview && cd ../backend && go build && ./utn'
 	},
 	testDir: 'tests',
 	testMatch: /(.+\.)?(test|spec)\.[jt]s/

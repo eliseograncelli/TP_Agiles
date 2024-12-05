@@ -17,14 +17,12 @@ test('Iniciar partida', async ({ page }) => {
 	expect(anchor).toBeVisible();
 });
 
-
 // Scenario: Ingresar letra válida
 
 test('Ingresar letra válida', async ({ page }) => {
-	
-// Given: ingreso la palabra "agil"
+	// Given: ingreso la palabra "agil"
 
-await page.goto('/create-game');
+	await page.goto('/create-game');
 	const input = await page.locator('input');
 	await input.fill('agil');
 
@@ -34,13 +32,9 @@ await page.goto('/create-game');
 
 	//Then: debería ver el link a la partida
 	const anchor = await page.locator('a');
-	await Promise.allSettled([ page.waitForResponse((response) => response.ok())]);
+	await Promise.allSettled([page.waitForResponse((response) => response.ok())]);
 
-
-
-// When: intento la letra "g"
-// Then: debería ver la letra revelada en la palabra
-// Then: la cantidad de vidas debería ser "7"
-
-
+	// When: intento la letra "g"
+	// Then: debería ver la letra revelada en la palabra
+	// Then: la cantidad de vidas debería ser "7"
 });

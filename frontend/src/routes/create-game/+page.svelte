@@ -1,21 +1,11 @@
 <script lang="ts">
-	import { PUBLIC_FRONT_URL } from '$env/static/public';
+	import { Api } from '$lib/api';
 
 	let word: string;
 	let url: string;
-	let base_url: string = PUBLIC_FRONT_URL + '/play/';
 
-	function onCreateGame() {
-		fetch('http://localhost:8000/create-game', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ word })
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				url = base_url + data.id;
-			})
-			.catch((error) => console.error('Error:', error));
+	async function onCreateGame() {
+		url = await Api.createGame(word);
 	}
 </script>
 
