@@ -2,7 +2,7 @@ import type { PlaywrightTestConfig } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
 	use: {
-		headless: false
+		headless: true
 	},
 	webServer: {
 		command: 'pnpm build && pnpm preview && cd ../backend && go build && ./utn',
