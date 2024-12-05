@@ -7,15 +7,17 @@ type GameResponse =
 	| { type: 'won'; encoded: string }
 	| { type: 'loss' };
 
+const baseUrl = `${location.protocol}//${location.host}`;
+
 export class Api {
-	static async createGame(word: string) {
+	static async createGame(word: string, opts: { baseUrl?: string } = { baseUrl }) {
 		return fetch('http://localhost:8000/create-game', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ word })
 		})
 			.then((response) => response.json())
-			.then((data) => `${PUBLIC_BACKEND_URL}/play/${data.id}`)
+			.then((data) => `${opts.baseUrl}/play/${data.id}`)
 			.catch((error) => {
 				const msj = 'Something went wrong';
 				alert(msj);
