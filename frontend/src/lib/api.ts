@@ -7,7 +7,7 @@ type GameResponse =
 	| { type: 'won'; encoded: string }
 	| { type: 'loss' };
 
-const baseUrl = `${location.protocol}//${location.host}`;
+const baseUrl = `${location.protocol}//${location.host}/`;
 
 export class Api {
 	static async createGame(word: string, opts: { baseUrl?: string } = { baseUrl }) {
@@ -17,7 +17,7 @@ export class Api {
 			body: JSON.stringify({ word })
 		})
 			.then((response) => response.json())
-			.then((data) => `${opts.baseUrl}/play/${data.id}`)
+			.then((data) => `${opts.baseUrl}play/${data.id}`)
 			.catch((error) => {
 				const msj = 'Something went wrong';
 				alert(msj);
@@ -29,7 +29,7 @@ export class Api {
 	constructor(private gameId: string) {}
 
 	async getGame(): Promise<{ encode: string }> {
-		const res = await fetch(`${PUBLIC_BACKEND_URL}/get-game/${this.gameId}`);
+		const res = await fetch(`${PUBLIC_BACKEND_URL}/get-game${this.gameId}`);
 		return await res.json();
 	}
 
