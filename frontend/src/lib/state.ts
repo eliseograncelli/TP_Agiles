@@ -1,5 +1,5 @@
 import { readonly, writable } from 'svelte/store';
-import type { Api } from './mock-api';
+import type { Api } from './api';
 
 export function createGameState(api: Api, gameId: string) {
 	const word = writable('');

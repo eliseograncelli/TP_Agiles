@@ -1,7 +1,7 @@
 <script lang="ts">
 	import DisplaySecret from '$lib/display-secret.svelte';
 	import Hangman from '$lib/hangman.svelte';
-	import { Api } from '$lib/mock-api';
+	import { Api } from '$lib/api';
 	import { createGameState } from '$lib/state';
 	import { page } from '$app/stores';
 
