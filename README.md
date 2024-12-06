@@ -22,3 +22,10 @@ Extras:
 - [] Tener test de integracion ?????
 - [ ] Mejorar la UI ????????
 
+
+Como ver los Test en Interfaz web:
+```bash
+go install github.com/smartystreets/goconvey@latest 
+cd backend/logic
+goconvey 
+
