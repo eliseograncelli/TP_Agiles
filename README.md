@@ -1,7 +1,7 @@
 # TP Agiles
 
 
-Backend Coverage: [Report](https://html-preview.github.io/?url=https://github.com/eliseograncelli/TP_Agiles/blob/main/backend/logic/cover.html)
+Backend Coverage: [Report](https://html-preview.github.io/?url=https://github.com/eliseograncelli/TP_Agiles/blob/main/backend/logic/cover.html#ec600507-849d-5f0c-a0b2-d76d4f61c4fa)
 
 Para hacer:
 
@@ -19,8 +19,13 @@ Extras:
 - [] FEATURE: Adivinar palabra !!!
 - [] FEATURE: Que no sea case sensitive !!!
 - [] FEATURE: no mostrar palabra repetidas repetidas !!!
-- [] LLegar al 100% de TDD (97.1%)
-- [] Estandarizar los test del back 
 - [] Tener test de integracion ?????
 - [ ] Mejorar la UI ????????
+
+
+Como ver los Test en Interfaz web:
+```bash
+go install github.com/smartystreets/goconvey@latest 
+cd backend/logic
+goconvey 
 

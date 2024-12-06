@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestCreateGame(t *testing.T) {
+func Test_create_game(t *testing.T) {
 	s := CreateGame("hola")
 
 	if s.lives != 7 {
@@ -18,7 +18,7 @@ func TestCreateGame(t *testing.T) {
 	}
 }
 
-func TestGuessCorrectLetter(t *testing.T) {
+func Test_guess_correct_letter(t *testing.T) {
 	s := CreateGame("hola")
 
 	res := s.GuessLetter('l')
@@ -27,7 +27,7 @@ func TestGuessCorrectLetter(t *testing.T) {
 	}
 }
 
-func TestGuessCorrectLetterTwice(t *testing.T) {
+func Test_guess_correct_letter_twice(t *testing.T) {
 	s := CreateGame("hola")
 
 	s.GuessLetter('l')
@@ -39,7 +39,7 @@ func TestGuessCorrectLetterTwice(t *testing.T) {
 
 }
 
-func TestGuessWrongLetter(t *testing.T) {
+func Test_guess_wrong_letter(t *testing.T) {
 	s := CreateGame("hola")
 
 	res := s.GuessLetter('z')
@@ -135,7 +135,7 @@ func Test_guess_word_loss_substract_lives(t *testing.T) {
 	}
 }
 
-func Test_Won_By_Guessing_letter(t *testing.T) {
+func Test_won_by_guessing_letter(t *testing.T) {
 	s := CreateGame("hola")
 	s.GuessLetter('o')
 	s.GuessLetter('h')
@@ -147,7 +147,7 @@ func Test_Won_By_Guessing_letter(t *testing.T) {
 	}
 }
 
-func Test_Loss_By_Guessing_letter(t *testing.T) {
+func Test_loss_by_guessing_letter(t *testing.T) {
 	s := CreateGame("zzzz")
 	s.GuessLetter('a')
 	s.GuessLetter('b')
@@ -158,6 +158,21 @@ func Test_Loss_By_Guessing_letter(t *testing.T) {
 	res := s.GuessLetter('g')
 
 	if res != Loss_Game {
+		t.Fatal()
+	}
+}
+
+func Test_get_lives(t *testing.T) {
+	s := CreateGame("agil")
+	if s.GetLives() != 7 {
+		t.Fatal()
+	}
+	s.GuessLetter('x')
+	if s.GetLives() != 6 {
+		t.Fatal()
+	}
+	s.GuessLetter('a')
+	if s.GetLives() != 6 {
 		t.Fatal()
 	}
 }
