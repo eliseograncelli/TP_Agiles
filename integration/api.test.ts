@@ -24,3 +24,15 @@ test("Adivnia letra incorrecta", async () => {
   const res=await new Api(id).guessesLetter("p")
   expect(res).toEqual({ type: "wrong", lives: 6 });
 });
+
+test("Adivnia palabra correcta", async () => {
+  const {id}=await Api.createGame("hola")
+  const res=await new Api(id).guessWord("hola")
+  expect(res).toEqual({ type: "won" });
+});
+
+test("Adivnia palabra incorrecta", async () => {
+  const {id}=await Api.createGame("hola")
+  const res=await new Api(id).guessWord("murcielago")
+  expect(res).toEqual({ type: "loss" });
+});

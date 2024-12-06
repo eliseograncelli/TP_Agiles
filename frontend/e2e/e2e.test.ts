@@ -117,27 +117,26 @@ test('Arriesgo la palabra correcta', async ({ page }) => {
 		page.waitForResponse((response) => response.ok())
 	]);
 
-//    When arriesgo la palabra "agil"
-page.locator('#word-input').fill('agil');
-await Promise.allSettled([
-	page.locator('#word-btn').click(),
-	page.waitForResponse((response) => response.ok())
-]);
+	//    When arriesgo la palabra "agil"
+	page.locator('#word-input').fill('agil');
+	await Promise.allSettled([
+		page.locator('#word-btn').click(),
+		page.waitForResponse((response) => response.ok())
+	]);
 
-//    Then debería aparecerme un cartel que diga "Ganaste"
+	//    Then debería aparecerme un cartel que diga "Ganaste"
 
-let alertMessage = '';
+	let alertMessage = '';
 
-page.on('dialog', async (dialog) => {
-  if (dialog.type() === 'alert') {
-	alertMessage = dialog.message(); 
-	await dialog.accept(); 
-  }
+	page.on('dialog', async (dialog) => {
+		if (dialog.type() === 'alert') {
+			alertMessage = dialog.message();
+			await dialog.accept();
+		}
+	});
+
+	expect(alertMessage).toBe('Ganaste');
 });
-
-
-expect(alertMessage).toBe("Ganaste")
-})
 
 //  Scenario: Arriesgo una palabra incorrecta
 //    Given ingreso la palabra "agil"
