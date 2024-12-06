@@ -104,11 +104,42 @@ test('Ingresar letra inválida', async ({ page }) => {
 });
 
 //  Scenario: Arriesgo la palabra correcta
-//    Given ingreso la palabra "elefante"
-//    When arriesgo la palabra "elefante"
-//    Then debería aparecerme un cartel que diga "Ganaste!"
+test('Arriesgo la palabra correcta', async ({ page }) => {
+	// Given: Partida iniciada con la palabra "agil"
+	await page.goto('/create-game');
+	page.locator('input').fill('agil');
+	await Promise.allSettled([
+		page.locator('button').click(),
+		page.waitForResponse((response) => response.ok())
+	]);
+	await Promise.allSettled([
+		page.locator('a').click(),
+		page.waitForResponse((response) => response.ok())
+	]);
+
+//    When arriesgo la palabra "agil"
+page.locator('#word-input').fill('agil');
+await Promise.allSettled([
+	page.locator('#word-btn').click(),
+	page.waitForResponse((response) => response.ok())
+]);
+
+//    Then debería aparecerme un cartel que diga "Ganaste"
+
+let alertMessage = '';
+
+page.on('dialog', async (dialog) => {
+  if (dialog.type() === 'alert') {
+	alertMessage = dialog.message(); 
+	await dialog.accept(); 
+  }
+});
+
+
+expect(alertMessage).toBe("Ganaste")
+})
 
 //  Scenario: Arriesgo una palabra incorrecta
-//    Given ingreso la palabra "elefante"
+//    Given ingreso la palabra "agil"
 //    When arriesgo la palabra "dinosaurio"
 //    Then debería aparecerme un cartel que diga "Perdiste!"
