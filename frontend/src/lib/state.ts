@@ -60,7 +60,6 @@ export function createGameState(api: Api) {
 				setTimeout(() => alert('Perdiste'), 20);
 				break;
 		}
-		
 
 		loading.set(false);
 	}
