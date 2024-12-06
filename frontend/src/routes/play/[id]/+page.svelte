@@ -4,6 +4,9 @@
 	import { Api } from '$lib/api';
 	import { createGameState } from '$lib/state';
 	import { page } from '$app/stores';
+	import { PUBLIC_BACKEND_URL } from '$env/static/public';
+
+	Api.BACK_URL = PUBLIC_BACKEND_URL;
 
 	const gameId = $page.params.id;
 
@@ -16,14 +19,13 @@
 
 	let letterGuess: string;
 	async function onLetterGuess() {
-		const aaa = await guessesLetter(letterGuess);
-		console.log(aaa);
+		await guessesLetter(letterGuess);
 		letterGuess = '';
 	}
 
 	let wordGuess: string;
-	function onWordGuess() {
-		guessesWord(wordGuess);
+	async function onWordGuess() {
+		await guessesWord(wordGuess);
 		wordGuess = '';
 	}
 </script>

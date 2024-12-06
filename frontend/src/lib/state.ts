@@ -43,9 +43,25 @@ export function createGameState(api: Api) {
 		loading.set(false);
 	}
 
-	function guessesWord(word: string) {
-		//TODO:implement
-		console.log(word);
+	async function guessesWord(guessedWord: string) {
+		loading.set(true);
+
+		const res = await api.guessWord(guessedWord);
+
+		switch (res.type) {
+			case 'won':
+				word.set(guessedWord);
+				playing.set(false);
+				setTimeout(() => alert('Ganaste'), 20);
+				break;
+			case 'loss':
+				playing.set(false);
+				lives.set(0);
+				setTimeout(() => alert('Perdiste'), 20);
+				break;
+		}
+
+		loading.set(false);
 	}
 
 	return {
