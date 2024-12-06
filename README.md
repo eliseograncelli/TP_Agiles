@@ -19,7 +19,7 @@ Extras:
 - [] FEATURE: Que no sea case sensitive !!!
 - [] FEATURE: no mostrar palabra repetidas repetidas !!!
 - [] Tener test de integracion ?????
-- [ ] Mejorar la UI ????????
+- [ ] Mejorar la UI ?????
 
 
 Como ver los Test en Interfaz web:
