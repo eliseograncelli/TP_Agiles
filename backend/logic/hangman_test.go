@@ -161,3 +161,18 @@ func Test_Loss_By_Guessing_letter(t *testing.T) {
 		t.Fatal()
 	}
 }
+
+func Test_Get_Lives(t *testing.T) {
+	s := CreateGame("agil")
+	if s.GetLives() != 7 {
+		t.Fatal()
+	}
+	s.GuessLetter('x')
+	if s.GetLives() != 6 {
+		t.Fatal()
+	}
+	s.GuessLetter('a')
+	if s.GetLives() != 6 {
+		t.Fatal()
+	}
+}
