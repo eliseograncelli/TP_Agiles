@@ -1,11 +1,23 @@
 <script lang="ts">
+	import { PUBLIC_BACKEND_URL } from '$env/static/public';
 	import { Api } from '$lib/api';
+
+	Api.BACK_URL = PUBLIC_BACKEND_URL;
 
 	let word: string;
 	let url: string;
 
 	async function onCreateGame() {
-		url = await Api.createGame(word);
+		const baseUrl = `${location.protocol}//${location.host}/`;
+
+		url = await Api.createGame(word)
+			.then((data) => `${baseUrl}play/${data.id}`)
+			.catch((error) => {
+				const msj = 'Something went wrong';
+				alert(msj);
+				console.log('Error:', error);
+				return msj;
+			});
 	}
 </script>
 

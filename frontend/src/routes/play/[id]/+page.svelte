@@ -4,6 +4,9 @@
 	import { Api } from '$lib/api';
 	import { createGameState } from '$lib/state';
 	import { page } from '$app/stores';
+	import { PUBLIC_BACKEND_URL } from '$env/static/public';
+
+	Api.BACK_URL = PUBLIC_BACKEND_URL;
 
 	const gameId = $page.params.id;
 
