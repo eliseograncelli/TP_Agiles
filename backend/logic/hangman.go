@@ -2,6 +2,16 @@ package logic
 
 import "strings"
 
+type GameResponse int64
+
+const (
+	Repited_Letter GameResponse = iota
+	Correct_Letter
+	Wrong_Letter
+	Won_Game
+	Loss_Game
+)
+
 type GameState struct {
 	lives       int
 	word        string
@@ -14,26 +24,6 @@ func CreateGame(word string) GameState {
 		word:        word,
 		usedLetters: []rune{},
 	}
-}
-
-type GameResponse int64
-
-const (
-	Repited_Letter GameResponse = iota
-	Correct_Letter
-	Wrong_Letter
-	Won_Game
-	Loss_Game
-)
-
-func (state *GameState) wonGame() bool {
-	count := 0
-	for _, c := range state.EncodeWord() {
-		if c == '#' {
-			count++
-		}
-	}
-	return count == 0
 }
 
 func (state *GameState) EncodeWord() string {
@@ -94,4 +84,14 @@ func (state *GameState) GuessWord(guess string) GameResponse {
 
 func (state *GameState) GetLives() int {
 	return state.lives
+}
+
+func (state *GameState) wonGame() bool {
+	count := 0
+	for _, c := range state.EncodeWord() {
+		if c == '#' {
+			count++
+		}
+	}
+	return count == 0
 }
