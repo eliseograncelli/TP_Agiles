@@ -41,7 +41,13 @@ jobs:
         run: go install github.com/cancue/covreport@latest
       - name: Generate coverage report
         working-directory: ./backend/logic
-        run: ~/go/bin/covereport
+        run: ls ~/
+      - name: Generate coverage report
+        working-directory: ./backend/logic
+        run: ls ~/go
+      - name: Generate coverage report
+        working-directory: ./backend/logic
+        run: ls ~/go/bin
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
