@@ -19,8 +19,6 @@ Extras:
 - [] FEATURE: Adivinar palabra !!!
 - [] FEATURE: Que no sea case sensitive !!!
 - [] FEATURE: no mostrar palabra repetidas repetidas !!!
-- [] LLegar al 100% de TDD (97.1%)
-- [] Estandarizar los test del back 
 - [] Tener test de integracion ?????
 - [ ] Mejorar la UI ????????
 
