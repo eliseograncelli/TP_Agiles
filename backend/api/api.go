@@ -70,13 +70,11 @@ func SetUpServer(repo peristance.GameRepository) {
 		})
 	})
 
-	type RequestGuessLetter struct {
-		GameId string `json:"gameId"`
-		Letter rune   `json:"letter"`
-	}
-
 	r.POST("/guess-letter", func(c *gin.Context) {
-		var data RequestGuessLetter
+		var data struct {
+			GameId string `json:"gameId"`
+			Letter rune   `json:"letter"`
+		}
 
 		err := c.ShouldBindJSON(&data)
 		if err != nil {
@@ -108,6 +106,36 @@ func SetUpServer(repo peristance.GameRepository) {
 			c.JSON(200, gin.H{
 				"type":    "won",
 				"encoded": game.EncodeWord(),
+			})
+		case logic.Loss_Game:
+			c.JSON(200, gin.H{
+				"type": "loss",
+			})
+		}
+
+	})
+
+	r.POST("/guess-word", func(c *gin.Context) {
+		var data struct {
+			GameId string `json:"gameId"`
+			Word   string `json:"word"`
+		}
+
+		err := c.ShouldBindJSON(&data)
+		if err != nil {
+			c.JSON(400, gin.H{"error": err.Error()})
+			return
+		}
+
+		fmt.Printf("data: %v\n", data)
+		game := repo.GetOne(data.GameId)
+		res := game.GuessWord(data.Word)
+		repo.Update(data.GameId, game)
+
+		switch res {
+		case logic.Won_Game:
+			c.JSON(200, gin.H{
+				"type": "won",
 			})
 		case logic.Loss_Game:
 			c.JSON(200, gin.H{
