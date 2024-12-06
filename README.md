@@ -1,7 +1,7 @@
 # TP Agiles
 
 
-Backend Coverage: [Report](https://html-preview.github.io/?url=https://github.com/eliseograncelli/TP_Agiles/blob/main/backend/logic/cover.html)
+Backend Coverage: [Report](https://html-preview.github.io/?url=https://github.com/eliseograncelli/TP_Agiles/blob/main/backend/logic/cover.html#ec600507-849d-5f0c-a0b2-d76d4f61c4fa)
 
 Para hacer:
 
