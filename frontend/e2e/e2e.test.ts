@@ -126,16 +126,8 @@ test('Arriesgo la palabra correcta', async ({ page }) => {
 
 	//    Then debería aparecerme un cartel que diga "Ganaste"
 
-	let alertMessage = '';
-
-	page.on('dialog', async (dialog) => {
-		if (dialog.type() === 'alert') {
-			alertMessage = dialog.message();
-			await dialog.accept();
-		}
-	});
-
-	expect(alertMessage).toBe('Ganaste');
+	const dialog = await page.waitForEvent('dialog');
+	expect(dialog.message()).toBe('Ganaste');
 });
 
 //  Scenario: Arriesgo una palabra incorrecta

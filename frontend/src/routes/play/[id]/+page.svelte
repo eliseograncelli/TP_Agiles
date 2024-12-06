@@ -19,14 +19,13 @@
 
 	let letterGuess: string;
 	async function onLetterGuess() {
-		const aaa = await guessesLetter(letterGuess);
-		console.log(aaa);
+		await guessesLetter(letterGuess);
 		letterGuess = '';
 	}
 
 	let wordGuess: string;
-	function onWordGuess() {
-		guessesWord(wordGuess);
+	async function onWordGuess() {
+		await guessesWord(wordGuess);
 		wordGuess = '';
 	}
 </script>
