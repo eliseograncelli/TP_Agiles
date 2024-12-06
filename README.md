@@ -6,7 +6,7 @@ Para hacer:
 - [x] CI Server ejecute los Unit Tests
 - [x] CI Server deploye a Producción
 - [x] CI Server ejecuta Análisis Estático de Código 
-- [] CI Server muestre resultados de Code Coverage
+- [?] CI Server muestre resultados de Code Coverage
 - [] Desarrollar UI Web con Acceptance Test (al menos 4)
 - [] CI Server ejecute los AT
 
