@@ -38,7 +38,7 @@ jobs:
         working-directory: ./backend/logic
         run: go test -coverprofile=cover.prof
       - name: Insatall report tool
-        run: go Install github.com/cancue/covreport@latest
+        run: go install github.com/cancue/covreport@latest
       - name: Generate coverage report
         working-directory: ./backend/logic
         run: ~/go/bin/covereport
