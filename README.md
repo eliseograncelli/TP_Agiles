@@ -1,5 +1,10 @@
+# TP Agiles
+
+
+Backend Coverage: [Report](https://html-preview.github.io/?url=https://github.com/eliseograncelli/TP_Agiles/blob/main/backend/logic/cover.html)
 
 Para hacer:
+
 - [X] Unit Tests usando TDD 
 - [x] Single Repository
 - [x] CI Server que solo compile (Github Actions, Azure DevOps, TravisCI, etc)
