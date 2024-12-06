@@ -11,12 +11,11 @@ Para hacer:
 - [x] CI Server ejecute los Unit Tests
 - [x] CI Server deploye a Producción
 - [x] CI Server ejecuta Análisis Estático de Código 
-- [?] CI Server muestre resultados de Code Coverage
-- [] Desarrollar UI Web con Acceptance Test (al menos 4)
-- [] CI Server ejecute los AT
+- [x] CI Server muestre resultados de Code Coverage
+- [x] Desarrollar UI Web con Acceptance Test (al menos 4)
+- [x] CI Server ejecute los AT
 
 Extras:
-- [] FEATURE: Adivinar palabra !!!
 - [] FEATURE: Que no sea case sensitive !!!
 - [] FEATURE: no mostrar palabra repetidas repetidas !!!
 - [] Tener test de integracion ?????
