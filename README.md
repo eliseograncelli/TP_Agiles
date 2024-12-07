@@ -52,7 +52,7 @@ pnpm run test:e2e
 ```
 
 
-## Integrtion Tests
+## Integration Tests
 The integration tests are in the `integration` folder, you have to fisrt start the backend and then run the tests:
 ```bash
 cd backend
