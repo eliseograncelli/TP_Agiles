@@ -1,9 +1,9 @@
 import { readonly, writable } from 'svelte/store';
 import type { Api } from './api';
 
-export function createGameState(api: Api) {
+export function createGameState(api: Api, gameId: string) {
 	const word = writable('');
-	api.getGame().then((game) => {
+	api.getGame(gameId).then((game) => {
 		word.set(game.encode);
 	});
 
@@ -16,7 +16,7 @@ export function createGameState(api: Api) {
 		guesses.update((g) => [...g, letter]);
 		loading.set(true);
 
-		const res = await api.guessesLetter(letter);
+		const res = await api.guessesLetter(gameId, letter);
 
 		switch (res.type) {
 			case 'repeated-letter':
@@ -46,7 +46,7 @@ export function createGameState(api: Api) {
 	async function guessesWord(guessedWord: string) {
 		loading.set(true);
 
-		const res = await api.guessWord(guessedWord);
+		const res = await api.guessWord(gameId, guessedWord);
 
 		switch (res.type) {
 			case 'won':

@@ -1,18 +1,13 @@
 <script lang="ts">
 	import DisplaySecret from '$lib/display-secret.svelte';
 	import Hangman from '$lib/hangman.svelte';
-	import { Api } from '$lib/api';
 	import { createGameState } from '$lib/state';
 	import { page } from '$app/stores';
-	import { PUBLIC_BACKEND_URL } from '$env/static/public';
-
-	Api.BACK_URL = PUBLIC_BACKEND_URL;
+	import { api } from '$lib';
 
 	const gameId = $page.params.id;
 
-	const api = new Api(gameId);
-
-	const { stores, actions } = createGameState(api);
+	const { stores, actions } = createGameState(api, gameId);
 
 	const { loading, lives, guesses, word, playing } = stores;
 	const { guessesLetter, guessesWord } = actions;
