@@ -1,38 +1,33 @@
-import { beforeAll, expect, test } from "vitest";
-import {Api} from "../frontend/src/lib/api"
+import { expect, test } from "vitest";
+import { Api } from "../frontend/src/lib/api";
 
-
-beforeAll(()=>{
-  Api.BACK_URL='http://localhost:8000'
-})
-
+const api = new Api("http://localhost:8000");
 
 test("Crea el juego y devuelve el id", async () => {
-  const {id}=await Api.createGame("hola")
-  expect(id).toBeTruthy()
+  const { id } = await api.createGame("hola");
+  expect(id).toBeTruthy();
 });
 
-
 test("Adivnia letra correcta", async () => {
-  const {id}=await Api.createGame("hola")
-  const res=await new Api(id).guessesLetter("h")
+  const { id } = await api.createGame("hola");
+  const res = await api.guessesLetter(id, "h");
   expect(res).toEqual({ type: "correct", encoded: "h###" });
 });
 
 test("Adivnia letra incorrecta", async () => {
-  const {id}=await Api.createGame("hola")
-  const res=await new Api(id).guessesLetter("p")
+  const { id } = await api.createGame("hola");
+  const res = await api.guessesLetter(id, "p");
   expect(res).toEqual({ type: "wrong", lives: 6 });
 });
 
 test("Adivnia palabra correcta", async () => {
-  const {id}=await Api.createGame("hola")
-  const res=await new Api(id).guessWord("hola")
+  const { id } = await api.createGame("hola");
+  const res = await api.guessWord(id, "hola");
   expect(res).toEqual({ type: "won" });
 });
 
 test("Adivnia palabra incorrecta", async () => {
-  const {id}=await Api.createGame("hola")
-  const res=await new Api(id).guessWord("murcielago")
+  const { id } = await api.createGame("hola");
+  const res = await api.guessWord(id, "murcielago");
   expect(res).toEqual({ type: "loss" });
 });
