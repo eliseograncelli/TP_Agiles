@@ -1,8 +1,5 @@
 <script lang="ts">
-	import { PUBLIC_BACKEND_URL } from '$env/static/public';
-	import { Api } from '$lib/api';
-
-	Api.BACK_URL = PUBLIC_BACKEND_URL;
+	import { api } from '$lib';
 
 	let word: string;
 	let url: string;
@@ -10,7 +7,8 @@
 	async function onCreateGame() {
 		const baseUrl = `${location.protocol}//${location.host}/`;
 
-		url = await Api.createGame(word)
+		url = await api
+			.createGame(word)
 			.then((data) => `${baseUrl}play/${data.id}`)
 			.catch((error) => {
 				const msj = 'Something went wrong';
