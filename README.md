@@ -67,9 +67,6 @@ pnpm run test:integration
 
 ## Extras:
 - [] FEATURE: Que no sea case sensitive !!!
-- [] FEATURE: no mostrar palabra repetidas repetidas !!!
-- [] Tener test de integracion ?????
-- [ ] Mejorar la UI ?????
 
 
 

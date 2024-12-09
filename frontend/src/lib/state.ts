@@ -3,14 +3,17 @@ import type { Api } from './api';
 
 export function createGameState(api: Api, gameId: string) {
 	const word = writable('');
-	api.getGame(gameId).then((game) => {
-		word.set(game.encode);
-	});
+	const lives = writable(7);
+	const guesses = writable(new Set());
 
 	const loading = writable(false);
-	const lives = writable(7);
 	const playing = writable(true);
-	const guesses = writable(new Set());
+
+	api.getGame(gameId).then((game) => {
+		word.set(game.encode);
+		lives.set(game.lives);
+		guesses.set(new Set(game.guesses));
+	});
 
 	async function guessesLetter(letter: string) {
 		guesses.update((g) => g.add(letter));

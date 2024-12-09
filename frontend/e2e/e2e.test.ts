@@ -209,3 +209,53 @@ test('Arriesgo la misma palabra correcta dos veces', async ({ page }) => {
 	// Then: debería ver la letra 'Y' en la letras arriesgadas UNA SOLA VEZ
 	expect(await page.locator('#guesses').innerText()).toEqual('g');
 });
+
+//  Scenario: Cuando recargo la pagina, se debe mantener el estado de la partida
+test('Cuando recargo la pagina, se debe mantener el estado de la partida', async ({ page }) => {
+	// Given: Partida iniciada con la palabra "agil"
+	await page.goto('/create-game');
+	page.locator('input').fill('agil');
+	await Promise.allSettled([
+		page.locator('button').click(),
+		page.waitForResponse((response) => response.ok())
+	]);
+	await Promise.allSettled([
+		page.locator('a').click(),
+		page.waitForResponse((response) => response.ok())
+	]);
+
+	// When: intento la letra "g" y "x"
+	page.locator('#letter-input').fill('g');
+	await Promise.allSettled([
+		page.locator('#letter-btn').click(),
+		page.waitForResponse((response) => response.ok())
+	]);
+	page.locator('#letter-input').fill('x');
+	await Promise.allSettled([
+		page.locator('#letter-btn').click(),
+		page.waitForResponse((response) => response.ok())
+	]);
+
+	// When: recargo la pagina
+	await page.reload();
+
+	// Then: debería ver la letra 'g' y 'x' en la letras arriesgadas
+	expect(await page.locator('#guesses').innerText()).toContain('g');
+	expect(await page.locator('#guesses').innerText()).toContain('x');
+
+	// Then: debería ver la letra revelada en la palabra
+	expect(await page.locator('[data-testid="letter-0"]').innerText()).toBe('_');
+	expect(await page.locator('[data-testid="letter-1"]').innerText()).toBe('G');
+	expect(await page.locator('[data-testid="letter-2"]').innerText()).toBe('_');
+	expect(await page.locator('[data-testid="letter-3"]').innerText()).toBe('_');
+
+	// Then: la cantidad de vidas debería ser "6"
+	expect(page.locator('.head')).toBeVisible();
+	expect(page.locator('.body')).not.toBeVisible();
+	expect(page.locator('.left-arm')).not.toBeVisible();
+	expect(page.locator('.right-arm')).not.toBeVisible();
+	expect(page.locator('.left-leg')).not.toBeVisible();
+	expect(page.locator('.right-leg')).not.toBeVisible();
+	expect(page.locator('.cut')).not.toBeVisible();
+	expect(page.locator('.eyes')).not.toBeVisible();
+});

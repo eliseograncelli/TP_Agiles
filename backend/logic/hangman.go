@@ -86,6 +86,14 @@ func (state *GameState) GetLives() int {
 	return state.lives
 }
 
+func (state *GameState) GetGuesses() []string {
+	guesses := make([]string, len(state.usedLetters))
+	for i, r := range state.usedLetters {
+		guesses[i] = string(r)
+	}
+	return guesses
+}
+
 func (state *GameState) wonGame() bool {
 	count := 0
 	for _, c := range state.EncodeWord() {
