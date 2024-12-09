@@ -1,4 +1,4 @@
-import { readonly, writable } from 'svelte/store';
+import { derived, readonly, writable } from 'svelte/store';
 import type { Api } from './api';
 
 export function createGameState(api: Api) {
@@ -10,10 +10,10 @@ export function createGameState(api: Api) {
 	const loading = writable(false);
 	const lives = writable(7);
 	const playing = writable(true);
-	const guesses = writable([] as string[]);
+	const guesses = writable(new Set());
 
 	async function guessesLetter(letter: string) {
-		guesses.update((g) => [...g, letter]);
+		guesses.update((g) => g.add(letter));
 		loading.set(true);
 
 		const res = await api.guessesLetter(letter);
@@ -68,7 +68,7 @@ export function createGameState(api: Api) {
 		stores: {
 			loading: readonly(loading),
 			lives: readonly(lives),
-			guesses: readonly(guesses),
+			guesses: derived(guesses, (g) => Array.from(g)),
 			word: readonly(word),
 			playing: readonly(playing)
 		},
