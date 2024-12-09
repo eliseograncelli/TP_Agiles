@@ -44,7 +44,6 @@ func (state *GameState) EncodeWord() string {
 
 func (state *GameState) GuessLetter(letter rune) GameResponse {
 
-	//TODO: caracters invalidos
 	for _, v := range state.usedLetters {
 		if v == letter {
 			return Repited_Letter
