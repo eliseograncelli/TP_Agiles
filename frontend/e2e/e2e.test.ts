@@ -155,3 +155,57 @@ test('Arriesgo la palabra incorrecta', async ({ page }) => {
 	const dialog = await page.waitForEvent('dialog');
 	expect(dialog.message()).toBe('Perdiste');
 });
+
+//  Scenario: Arriesgo la misma palabra incorrecta dos veces
+test('Arriesgo la misma palabra incorrecta dos veces', async ({ page }) => {
+	// Given: Partida iniciada con la palabra "agil"
+	await page.goto('/create-game');
+	page.locator('input').fill('agil');
+	await Promise.allSettled([
+		page.locator('button').click(),
+		page.waitForResponse((response) => response.ok())
+	]);
+	await Promise.allSettled([
+		page.locator('a').click(),
+		page.waitForResponse((response) => response.ok())
+	]);
+
+	// When: intento la letra "y" dos veces
+	for (const _ of Array(2)) {
+		page.locator('#letter-input').fill('y');
+		await Promise.allSettled([
+			page.locator('#letter-btn').click(),
+			page.waitForResponse((response) => response.ok())
+		]);
+	}
+
+	// Then: debería ver la letra 'Y' en la letras arriesgadas UNA SOLA VEZ
+	expect(await page.locator('#guesses').innerText()).toEqual('y');
+});
+
+//  Scenario: Arriesgo la misma palabra correcta dos veces
+test('Arriesgo la misma palabra correcta dos veces', async ({ page }) => {
+	// Given: Partida iniciada con la palabra "agil"
+	await page.goto('/create-game');
+	page.locator('input').fill('agil');
+	await Promise.allSettled([
+		page.locator('button').click(),
+		page.waitForResponse((response) => response.ok())
+	]);
+	await Promise.allSettled([
+		page.locator('a').click(),
+		page.waitForResponse((response) => response.ok())
+	]);
+
+	// When: intento la letra "y" dos veces
+	for (const _ of Array(2)) {
+		page.locator('#letter-input').fill('g');
+		await Promise.allSettled([
+			page.locator('#letter-btn').click(),
+			page.waitForResponse((response) => response.ok())
+		]);
+	}
+
+	// Then: debería ver la letra 'Y' en la letras arriesgadas UNA SOLA VEZ
+	expect(await page.locator('#guesses').innerText()).toEqual('g');
+});
