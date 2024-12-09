@@ -176,3 +176,19 @@ func Test_get_lives(t *testing.T) {
 		t.Fatal()
 	}
 }
+
+func Test_get_guesses(t *testing.T) {
+	s := CreateGame("agil")
+	if len(s.GetGuesses()) != 0 {
+		t.Fatal()
+	}
+
+	s.GuessLetter('x')
+	if len(s.GetGuesses()) != 1 {
+		t.Fatal()
+	}
+
+	if s.GetGuesses()[0] != "x" {
+		t.Fatal()
+	}
+}

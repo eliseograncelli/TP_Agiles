@@ -65,8 +65,10 @@ func SetUpServer(repo peristance.GameRepository) {
 
 		fmt.Printf("game: %v\n", game)
 		c.JSON(200, gin.H{
-			"id":     id,
-			"encode": game.EncodeWord(),
+			"id":      id,
+			"encode":  game.EncodeWord(),
+			"lives":   game.GetLives(),
+			"guesses": game.GetGuesses(),
 		})
 	})
 

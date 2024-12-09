@@ -5,6 +5,13 @@ type GameResponse =
 	| { type: 'won'; encoded: string }
 	| { type: 'loss' };
 
+type GameState = {
+	id: string;
+	encode: string;
+	lives: number;
+	guesses: string[];
+};
+
 export class Api {
 	constructor(private readonly BACK_URL: string) {}
 
@@ -16,9 +23,9 @@ export class Api {
 		}).then((response) => response.json()) as Promise<{ id: string }>;
 	}
 
-	async getGame(gameId: string): Promise<{ encode: string }> {
-		const res = await fetch(`${this.BACK_URL}/get-game/${gameId}`);
-		return await res.json();
+	async getGame(gameId: string) {
+		const res = await fetch(`${this.BACK_URL}/get-game/${gameId}`).then((x) => x.json());
+		return res as GameState;
 	}
 
 	async guessesLetter(gameId: string, letter: string) {
