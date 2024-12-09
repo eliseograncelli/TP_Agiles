@@ -245,66 +245,65 @@
 <div class="line-number">44</div><div class="covered-count"></div><pre class="line"></pre>
 <div class="line-number">45</div><div class="covered-count covered">1x</div><pre class="line covered">func (state *GameState) GuessLetter(letter rune) GameResponse {</pre>
 <div class="line-number">46</div><div class="covered-count covered">1x</div><pre class="line covered"></pre>
-<div class="line-number">47</div><div class="covered-count covered">1x</div><pre class="line covered">    //TODO: caracters invalidos</pre>
-<div class="line-number">48</div><div class="covered-count covered">1x</div><pre class="line covered">    for _, v := range state.usedLetters {</pre>
-<div class="line-number">49</div><div class="covered-count covered">1x</div><pre class="line covered">        if v == letter {</pre>
-<div class="line-number">50</div><div class="covered-count covered">1x</div><pre class="line covered">            return Repited_Letter</pre>
-<div class="line-number">51</div><div class="covered-count covered">1x</div><pre class="line covered">        }</pre>
-<div class="line-number">52</div><div class="covered-count"></div><pre class="line">    }</pre>
-<div class="line-number">53</div><div class="covered-count"></div><pre class="line"></pre>
-<div class="line-number">54</div><div class="covered-count covered">1x</div><pre class="line covered">    state.usedLetters = append(state.usedLetters, letter)</pre>
-<div class="line-number">55</div><div class="covered-count covered">1x</div><pre class="line covered"></pre>
-<div class="line-number">56</div><div class="covered-count covered">1x</div><pre class="line covered">    found := false</pre>
-<div class="line-number">57</div><div class="covered-count covered">1x</div><pre class="line covered">    for _, v := range state.word {</pre>
-<div class="line-number">58</div><div class="covered-count covered">1x</div><pre class="line covered">        if v == letter {</pre>
-<div class="line-number">59</div><div class="covered-count covered">1x</div><pre class="line covered">            found = true</pre>
-<div class="line-number">60</div><div class="covered-count covered">1x</div><pre class="line covered">        }</pre>
-<div class="line-number">61</div><div class="covered-count"></div><pre class="line">    }</pre>
-<div class="line-number">62</div><div class="covered-count covered">1x</div><pre class="line covered">    if found {</pre>
-<div class="line-number">63</div><div class="covered-count covered">1x</div><pre class="line covered">        if state.wonGame() {</pre>
-<div class="line-number">64</div><div class="covered-count covered">1x</div><pre class="line covered">            return Won_Game</pre>
-<div class="line-number">65</div><div class="covered-count covered">1x</div><pre class="line covered">        }</pre>
-<div class="line-number">66</div><div class="covered-count covered">1x</div><pre class="line covered">        return Correct_Letter</pre>
-<div class="line-number">67</div><div class="covered-count covered">1x</div><pre class="line covered">    } else {</pre>
-<div class="line-number">68</div><div class="covered-count covered">1x</div><pre class="line covered">        state.lives -= 1</pre>
-<div class="line-number">69</div><div class="covered-count covered">1x</div><pre class="line covered">        if state.lives == 0 {</pre>
-<div class="line-number">70</div><div class="covered-count covered">1x</div><pre class="line covered">            return Loss_Game</pre>
-<div class="line-number">71</div><div class="covered-count covered">1x</div><pre class="line covered">        }</pre>
-<div class="line-number">72</div><div class="covered-count covered">1x</div><pre class="line covered">        return Wrong_Letter</pre>
-<div class="line-number">73</div><div class="covered-count"></div><pre class="line">    }</pre>
-<div class="line-number">74</div><div class="covered-count"></div><pre class="line"></pre>
-<div class="line-number">75</div><div class="covered-count"></div><pre class="line">}</pre>
-<div class="line-number">76</div><div class="covered-count"></div><pre class="line"></pre>
-<div class="line-number">77</div><div class="covered-count covered">1x</div><pre class="line covered">func (state *GameState) GuessWord(guess string) GameResponse {</pre>
-<div class="line-number">78</div><div class="covered-count covered">1x</div><pre class="line covered">    if state.word == guess {</pre>
-<div class="line-number">79</div><div class="covered-count covered">1x</div><pre class="line covered">        return Won_Game</pre>
-<div class="line-number">80</div><div class="covered-count covered">1x</div><pre class="line covered">    }</pre>
-<div class="line-number">81</div><div class="covered-count covered">1x</div><pre class="line covered">    state.lives = 0</pre>
-<div class="line-number">82</div><div class="covered-count covered">1x</div><pre class="line covered">    return Loss_Game</pre>
-<div class="line-number">83</div><div class="covered-count"></div><pre class="line">}</pre>
-<div class="line-number">84</div><div class="covered-count"></div><pre class="line"></pre>
-<div class="line-number">85</div><div class="covered-count covered">1x</div><pre class="line covered">func (state *GameState) GetLives() int {</pre>
-<div class="line-number">86</div><div class="covered-count covered">1x</div><pre class="line covered">    return state.lives</pre>
-<div class="line-number">87</div><div class="covered-count covered">1x</div><pre class="line covered">}</pre>
-<div class="line-number">88</div><div class="covered-count"></div><pre class="line"></pre>
-<div class="line-number">89</div><div class="covered-count covered">1x</div><pre class="line covered">func (state *GameState) GetGuesses() []string {</pre>
-<div class="line-number">90</div><div class="covered-count covered">1x</div><pre class="line covered">    guesses := make([]string, len(state.usedLetters))</pre>
-<div class="line-number">91</div><div class="covered-count covered">1x</div><pre class="line covered">    for i, r := range state.usedLetters {</pre>
-<div class="line-number">92</div><div class="covered-count covered">1x</div><pre class="line covered">        guesses[i] = string(r)</pre>
-<div class="line-number">93</div><div class="covered-count covered">1x</div><pre class="line covered">    }</pre>
-<div class="line-number">94</div><div class="covered-count covered">1x</div><pre class="line covered">    return guesses</pre>
-<div class="line-number">95</div><div class="covered-count"></div><pre class="line">}</pre>
-<div class="line-number">96</div><div class="covered-count"></div><pre class="line"></pre>
-<div class="line-number">97</div><div class="covered-count covered">1x</div><pre class="line covered">func (state *GameState) wonGame() bool {</pre>
-<div class="line-number">98</div><div class="covered-count covered">1x</div><pre class="line covered">    count := 0</pre>
-<div class="line-number">99</div><div class="covered-count covered">1x</div><pre class="line covered">    for _, c := range state.EncodeWord() {</pre>
-<div class="line-number">100</div><div class="covered-count covered">1x</div><pre class="line covered">        if c == '#' {</pre>
-<div class="line-number">101</div><div class="covered-count covered">1x</div><pre class="line covered">            count++</pre>
-<div class="line-number">102</div><div class="covered-count covered">1x</div><pre class="line covered">        }</pre>
-<div class="line-number">103</div><div class="covered-count"></div><pre class="line">    }</pre>
-<div class="line-number">104</div><div class="covered-count covered">1x</div><pre class="line covered">    return count == 0</pre>
-<div class="line-number">105</div><div class="covered-count"></div><pre class="line">}</pre>
-<div class="line-number">106</div><div class="covered-count"></div><pre class="line"></pre>
+<div class="line-number">47</div><div class="covered-count covered">1x</div><pre class="line covered">    for _, v := range state.usedLetters {</pre>
+<div class="line-number">48</div><div class="covered-count covered">1x</div><pre class="line covered">        if v == letter {</pre>
+<div class="line-number">49</div><div class="covered-count covered">1x</div><pre class="line covered">            return Repited_Letter</pre>
+<div class="line-number">50</div><div class="covered-count covered">1x</div><pre class="line covered">        }</pre>
+<div class="line-number">51</div><div class="covered-count"></div><pre class="line">    }</pre>
+<div class="line-number">52</div><div class="covered-count"></div><pre class="line"></pre>
+<div class="line-number">53</div><div class="covered-count covered">1x</div><pre class="line covered">    state.usedLetters = append(state.usedLetters, letter)</pre>
+<div class="line-number">54</div><div class="covered-count covered">1x</div><pre class="line covered"></pre>
+<div class="line-number">55</div><div class="covered-count covered">1x</div><pre class="line covered">    found := false</pre>
+<div class="line-number">56</div><div class="covered-count covered">1x</div><pre class="line covered">    for _, v := range state.word {</pre>
+<div class="line-number">57</div><div class="covered-count covered">1x</div><pre class="line covered">        if v == letter {</pre>
+<div class="line-number">58</div><div class="covered-count covered">1x</div><pre class="line covered">            found = true</pre>
+<div class="line-number">59</div><div class="covered-count covered">1x</div><pre class="line covered">        }</pre>
+<div class="line-number">60</div><div class="covered-count"></div><pre class="line">    }</pre>
+<div class="line-number">61</div><div class="covered-count covered">1x</div><pre class="line covered">    if found {</pre>
+<div class="line-number">62</div><div class="covered-count covered">1x</div><pre class="line covered">        if state.wonGame() {</pre>
+<div class="line-number">63</div><div class="covered-count covered">1x</div><pre class="line covered">            return Won_Game</pre>
+<div class="line-number">64</div><div class="covered-count covered">1x</div><pre class="line covered">        }</pre>
+<div class="line-number">65</div><div class="covered-count covered">1x</div><pre class="line covered">        return Correct_Letter</pre>
+<div class="line-number">66</div><div class="covered-count covered">1x</div><pre class="line covered">    } else {</pre>
+<div class="line-number">67</div><div class="covered-count covered">1x</div><pre class="line covered">        state.lives -= 1</pre>
+<div class="line-number">68</div><div class="covered-count covered">1x</div><pre class="line covered">        if state.lives == 0 {</pre>
+<div class="line-number">69</div><div class="covered-count covered">1x</div><pre class="line covered">            return Loss_Game</pre>
+<div class="line-number">70</div><div class="covered-count covered">1x</div><pre class="line covered">        }</pre>
+<div class="line-number">71</div><div class="covered-count covered">1x</div><pre class="line covered">        return Wrong_Letter</pre>
+<div class="line-number">72</div><div class="covered-count"></div><pre class="line">    }</pre>
+<div class="line-number">73</div><div class="covered-count"></div><pre class="line"></pre>
+<div class="line-number">74</div><div class="covered-count"></div><pre class="line">}</pre>
+<div class="line-number">75</div><div class="covered-count"></div><pre class="line"></pre>
+<div class="line-number">76</div><div class="covered-count covered">1x</div><pre class="line covered">func (state *GameState) GuessWord(guess string) GameResponse {</pre>
+<div class="line-number">77</div><div class="covered-count covered">1x</div><pre class="line covered">    if state.word == guess {</pre>
+<div class="line-number">78</div><div class="covered-count covered">1x</div><pre class="line covered">        return Won_Game</pre>
+<div class="line-number">79</div><div class="covered-count covered">1x</div><pre class="line covered">    }</pre>
+<div class="line-number">80</div><div class="covered-count covered">1x</div><pre class="line covered">    state.lives = 0</pre>
+<div class="line-number">81</div><div class="covered-count covered">1x</div><pre class="line covered">    return Loss_Game</pre>
+<div class="line-number">82</div><div class="covered-count"></div><pre class="line">}</pre>
+<div class="line-number">83</div><div class="covered-count"></div><pre class="line"></pre>
+<div class="line-number">84</div><div class="covered-count covered">1x</div><pre class="line covered">func (state *GameState) GetLives() int {</pre>
+<div class="line-number">85</div><div class="covered-count covered">1x</div><pre class="line covered">    return state.lives</pre>
+<div class="line-number">86</div><div class="covered-count covered">1x</div><pre class="line covered">}</pre>
+<div class="line-number">87</div><div class="covered-count"></div><pre class="line"></pre>
+<div class="line-number">88</div><div class="covered-count covered">1x</div><pre class="line covered">func (state *GameState) GetGuesses() []string {</pre>
+<div class="line-number">89</div><div class="covered-count covered">1x</div><pre class="line covered">    guesses := make([]string, len(state.usedLetters))</pre>
+<div class="line-number">90</div><div class="covered-count covered">1x</div><pre class="line covered">    for i, r := range state.usedLetters {</pre>
+<div class="line-number">91</div><div class="covered-count covered">1x</div><pre class="line covered">        guesses[i] = string(r)</pre>
+<div class="line-number">92</div><div class="covered-count covered">1x</div><pre class="line covered">    }</pre>
+<div class="line-number">93</div><div class="covered-count covered">1x</div><pre class="line covered">    return guesses</pre>
+<div class="line-number">94</div><div class="covered-count"></div><pre class="line">}</pre>
+<div class="line-number">95</div><div class="covered-count"></div><pre class="line"></pre>
+<div class="line-number">96</div><div class="covered-count covered">1x</div><pre class="line covered">func (state *GameState) wonGame() bool {</pre>
+<div class="line-number">97</div><div class="covered-count covered">1x</div><pre class="line covered">    count := 0</pre>
+<div class="line-number">98</div><div class="covered-count covered">1x</div><pre class="line covered">    for _, c := range state.EncodeWord() {</pre>
+<div class="line-number">99</div><div class="covered-count covered">1x</div><pre class="line covered">        if c == '#' {</pre>
+<div class="line-number">100</div><div class="covered-count covered">1x</div><pre class="line covered">            count++</pre>
+<div class="line-number">101</div><div class="covered-count covered">1x</div><pre class="line covered">        }</pre>
+<div class="line-number">102</div><div class="covered-count"></div><pre class="line">    }</pre>
+<div class="line-number">103</div><div class="covered-count covered">1x</div><pre class="line covered">    return count == 0</pre>
+<div class="line-number">104</div><div class="covered-count"></div><pre class="line">}</pre>
+<div class="line-number">105</div><div class="covered-count"></div><pre class="line"></pre>
 
 			</div>
 			
