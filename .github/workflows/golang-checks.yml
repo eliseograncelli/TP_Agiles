@@ -1,4 +1,4 @@
-name: Golang Checks
+name: Go 
 
 on:
   push:
