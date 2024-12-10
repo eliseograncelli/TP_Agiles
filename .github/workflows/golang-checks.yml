@@ -1,4 +1,4 @@
-name: Golang Checks
+name: Go 
 
 on:
   push:
@@ -10,6 +10,7 @@ on:
 
 jobs:
   format:
+    name: Format Backend Code 
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -23,6 +24,7 @@ jobs:
         run: gofmt -l .
 
   unit-test:
+    name: Unit Tests in Backend
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -49,6 +51,7 @@ jobs:
           branch: ${{ github.head_ref }}
 
   check-build:
+    name: Check that Backends Compiles 
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

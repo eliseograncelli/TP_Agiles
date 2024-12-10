@@ -64,3 +64,23 @@ pnpm run test:integration
 ```
 
 
+## CI/CD
+```bash
+All checks were successful
+0 cancelled, 0 failing, 12 successful, 0 skipped, and 0 pending checks
+
+   NAME                                                DESCRIPTION               ELAPSED  
+✓  E2E/Acceptance Tests (20) (pull_request)                                      46s      
+✓  Integration/Integration Tests (20) (pull_request)                             27s      
+✓  Svelte/Format Frontend Code (20) (pull_request)                               10s      
+✓  Svelte/Check Build of Frontend (20) (pull_request)                            12s      
+✓  Svelte/Lint Frontend Code (20) (pull_request)                                 14s      
+✓  Svelte/TypeScript Checks (20) (pull_request)                                  15s      
+✓  Svelte/Unit Tests in Frontend (20) (pull_request)                             11s      
+✓  Go/Format Backend Code (pull_request)                                         7s       
+✓  Go/Check that Backends Compiles (pull_request)                                25s      
+✓  Go/Unit Tests in Backend (pull_request)                                       18s      
+✓  Vercel                                              Deployment has completed           
+✓  Vercel Preview Comments                                                                
+
+```

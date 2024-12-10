@@ -1,7 +1,16 @@
-import { expect, test } from "vitest";
+import { beforeAll, expect, test } from "vitest";
 import { Api } from "../frontend/src/lib/api";
 
 const api = new Api("http://localhost:8000");
+
+beforeAll(async () => {
+  for (let i = 0; i < 10; i++) {
+    const { ok } = await api.healthCheck();
+    if (ok) {
+      break;
+    }
+  }
+});
 
 test("Crea el juego y devuelve el id", async () => {
   const { id } = await api.createGame("hola");

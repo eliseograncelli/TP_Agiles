@@ -15,6 +15,12 @@ type GameState = {
 export class Api {
 	constructor(private readonly BACK_URL: string) {}
 
+	async healthCheck() {
+		return fetch(`${this.BACK_URL}/health-check`)
+			.then((x) => x.json() as Promise<{ ok: true }>)
+			.catch(() => ({ ok: false }));
+	}
+
 	async createGame(word: string) {
 		return fetch(`${this.BACK_URL}/create-game`, {
 			method: 'POST',

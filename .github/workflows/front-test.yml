@@ -1,4 +1,4 @@
-name: Svelte Checks
+name: Svelte 
 
 on:
   pull_request:
@@ -10,6 +10,7 @@ defaults:
 
 jobs:
   format:
+    name: Format Frontend Code
     runs-on: ubuntu-22.04
     strategy:
       matrix:
@@ -34,6 +35,7 @@ jobs:
           commit_message: '[Github Action]->format'
           branch: ${{ github.head_ref }}
   lint:
+    name: Lint Frontend Code
     needs: [format]
     runs-on: ubuntu-22.04
     strategy:
@@ -54,6 +56,7 @@ jobs:
       - name: Run Linter
         run: pnpm lint
   typescript-checks:
+    name: TypeScript Checks
     needs: [format]
     runs-on: ubuntu-22.04
     strategy:
@@ -75,6 +78,7 @@ jobs:
         run: pnpm check
 
   unit-tests:
+    name: Unit Tests in Frontend
     needs: [format]
     runs-on: ubuntu-22.04
     strategy:
@@ -97,6 +101,7 @@ jobs:
 
 
   build-front:
+    name: Check Build of Frontend
     needs: [format]
     runs-on: ubuntu-22.04
     strategy:

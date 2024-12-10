@@ -32,8 +32,9 @@ func SetUpServer(repo peristance.GameRepository) {
 
 	r.Use(CORSMiddleware())
 
-	r.GET("/healthcheck", func(c *gin.Context) {
+	r.GET("/health-check", func(c *gin.Context) {
 		c.JSON(200, gin.H{
+			"ok":      true,
 			"message": "Hola Mundo",
 		})
 	})
