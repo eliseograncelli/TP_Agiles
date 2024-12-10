@@ -4,6 +4,9 @@
 	import { createGameState } from '$lib/state';
 	import { page } from '$app/stores';
 	import { api } from '$lib';
+	import { fly } from 'svelte/transition';
+	import { beforeNavigate } from '$app/navigation';
+	import Progress from '$lib/Progress.svelte';
 
 	const gameId = $page.params.id;
 
@@ -24,6 +27,8 @@
 		wordGuess = '';
 	}
 </script>
+
+<Progress loading={$loading} />
 
 <main class="container">
 	<section class="side-left">
@@ -83,6 +88,7 @@
 		margin-top: 40px;
 		margin-left: 20px;
 	}
+
 	main {
 		display: flex;
 		flex-direction: row;
@@ -91,6 +97,7 @@
 		width: 100%;
 		height: 85vh;
 	}
+
 	.side-left {
 		padding-top: 20px;
 		width: 200px;
@@ -100,6 +107,7 @@
 		background-color: white;
 		border-radius: 20px;
 	}
+
 	.side-right {
 		padding-left: 80px;
 		padding-top: 40px;
