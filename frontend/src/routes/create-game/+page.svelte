@@ -17,12 +17,22 @@
 				return msj;
 			});
 	}
+
+	function copyToClipboard({ target }: { target: unknown }) {
+		navigator.clipboard.writeText(url);
+		if (target instanceof HTMLElement) {
+			const prev = target.innerText;
+			target.innerText = 'Copied!';
+			setTimeout(() => (target.innerText = prev), 1500);
+		}
+	}
 </script>
 
 <main class="container">
 	<h1>Hangman UTN</h1>
 	{#if url}
 		<p>url: <a href={url}>{url}</a></p>
+		<button on:click={copyToClipboard}>Copy to clipboard</button>
 	{:else}
 		<input type="text" bind:value={word} placeholder="Enter a word" />
 		<button on:click={onCreateGame}>Create Game</button>
