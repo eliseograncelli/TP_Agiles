@@ -1,6 +1,7 @@
 package logic
 
 import "strings"
+import "unicode"
 
 type GameResponse int64
 
@@ -21,7 +22,7 @@ type GameState struct {
 func CreateGame(word string) GameState {
 	return GameState{
 		lives:       7,
-		word:        word,
+		word:        strings.ToUpper(word),
 		usedLetters: []rune{},
 	}
 }
@@ -43,6 +44,8 @@ func (state *GameState) EncodeWord() string {
 }
 
 func (state *GameState) GuessLetter(letter rune) GameResponse {
+
+	letter = unicode.ToUpper(letter)
 
 	for _, v := range state.usedLetters {
 		if v == letter {
@@ -74,6 +77,9 @@ func (state *GameState) GuessLetter(letter rune) GameResponse {
 }
 
 func (state *GameState) GuessWord(guess string) GameResponse {
+
+	guess = strings.ToUpper(guess)
+
 	if state.word == guess {
 		return Won_Game
 	}
