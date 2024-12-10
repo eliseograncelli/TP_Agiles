@@ -16,7 +16,7 @@ export function createGameState(api: Api, gameId: string) {
 	});
 
 	async function guessesLetter(letter: string) {
-		guesses.update((g) => g.add(letter));
+		guesses.update((g) => g.add(letter.toUpperCase()));
 		loading.set(true);
 
 		const res = await api.guessesLetter(gameId, letter);
