@@ -4,8 +4,6 @@
 	import { createGameState } from '$lib/state';
 	import { page } from '$app/stores';
 	import { api } from '$lib';
-	import { fly } from 'svelte/transition';
-	import { beforeNavigate } from '$app/navigation';
 	import Progress from '$lib/Progress.svelte';
 
 	const gameId = $page.params.id;
