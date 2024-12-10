@@ -21,17 +21,17 @@ test("Obtiene el estado del juego en la mitad", async () => {
   await api.guessesLetter(id, "h");
   await api.guessesLetter(id, "j");
   const res = await api.getGame(id);
-  expect(res.encode).toBe("h###");
+  expect(res.encode).toBe("H###");
   expect(res.lives).toBe(6);
-  expect(res.guesses).toContain("h");
-  expect(res.guesses).toContain("j");
+  expect(res.guesses).toContain("H");
+  expect(res.guesses).toContain("J");
   expect(res.guesses.length).toBe(2);
 });
 
 test("Adivnia letra correcta", async () => {
   const { id } = await api.createGame("hola");
   const res = await api.guessesLetter(id, "h");
-  expect(res).toEqual({ type: "correct", encoded: "h###" });
+  expect(res).toEqual({ type: "correct", encoded: "H###" });
 });
 
 test("Adivnia letra incorrecta", async () => {
