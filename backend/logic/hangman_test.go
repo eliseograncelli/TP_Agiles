@@ -10,7 +10,7 @@ func Test_create_game(t *testing.T) {
 	if s.lives != 7 {
 		t.Fatalf("Wrong lives")
 	}
-	if s.word != "hola" {
+	if s.word != "HOLA" {
 		t.Fatalf("Wrong word")
 	}
 	if len(s.usedLetters) != 0 {
@@ -74,7 +74,7 @@ func Test_encode_first_gussed(t *testing.T) {
 	s.GuessLetter('h')
 	res := s.EncodeWord()
 
-	if res != "h###" {
+	if res != "H###" {
 		t.Fatal()
 	}
 }
@@ -85,7 +85,7 @@ func Test_encode_first_gussed_missed_second(t *testing.T) {
 	s.GuessLetter('y')
 	res := s.EncodeWord()
 
-	if res != "h###" {
+	if res != "H###" {
 		t.Fatal()
 	}
 }
@@ -96,7 +96,7 @@ func Test_encode_first_and_second(t *testing.T) {
 	s.GuessLetter('l')
 	res := s.EncodeWord()
 
-	if res != "h#l#" {
+	if res != "H#L#" {
 		t.Fatal()
 	}
 }
@@ -106,7 +106,7 @@ func Test_encode_guest_duplicated_letter(t *testing.T) {
 	s.GuessLetter('r')
 	res := s.EncodeWord()
 
-	if res != "##rr#" {
+	if res != "##RR#" {
 		t.Fatal()
 	}
 }
@@ -188,7 +188,19 @@ func Test_get_guesses(t *testing.T) {
 		t.Fatal()
 	}
 
-	if s.GetGuesses()[0] != "x" {
+	if s.GetGuesses()[0] != "X" {
+		t.Fatal()
+	}
+}
+
+func Test_be_case_insensitive(t *testing.T) {
+	s := CreateGame("Agil")
+	s.GuessLetter('a')
+	if s.GetLives() != 7 {
+		t.Fatal()
+	}
+	s.GuessLetter('G')
+	if s.GetLives() != 7 {
 		t.Fatal()
 	}
 }
