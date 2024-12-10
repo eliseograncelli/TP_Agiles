@@ -6,7 +6,8 @@ on:
 
 
 jobs:
-  acceptance-tests:
+  integration-tests:
+    name: Integration Tests
     runs-on: ubuntu-22.04
     strategy:
       matrix:
