@@ -192,3 +192,15 @@ func Test_get_guesses(t *testing.T) {
 		t.Fatal()
 	}
 }
+
+func Test_be_case_insensitive(t *testing.T) {
+	s := CreateGame("Agil")
+	s.GuessLetter('a')
+	if s.GetLives() != 7 {
+		t.Fatal()
+	}
+	s.GuessLetter('G')
+	if s.GetLives() != 7 {
+		t.Fatal()
+	}
+}
