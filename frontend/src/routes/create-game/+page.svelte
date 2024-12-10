@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { api } from '$lib';
 	import Progress from '$lib/Progress.svelte';
-	import { load } from '../+page.server';
 
 	let word: string;
 	let url: string;
