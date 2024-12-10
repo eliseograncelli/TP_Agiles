@@ -43,7 +43,7 @@ test('Ingresar letra válida', async ({ page }) => {
 	]);
 
 	// Then: debería ver la letra g en la letras arriesgadas
-	expect(await page.locator('#guesses').innerText()).toContain('g');
+	expect(await page.locator('#guesses').innerText()).toContain('G');
 
 	// Then: debería ver la letra revelada en la palabra
 	expect(await page.locator('[data-testid="letter-0"]').innerText()).toBe('_');
@@ -84,7 +84,7 @@ test('Ingresar letra inválida', async ({ page }) => {
 	]);
 
 	// Then: debería ver la letra y en la letras arriesgadas
-	expect(await page.locator('#guesses').innerText()).toContain('y');
+	expect(await page.locator('#guesses').innerText()).toContain('Y');
 
 	// Then: la palabra revelada deberia seguir igual
 	expect(await page.locator('[data-testid="letter-0"]').innerText()).toBe('_');
@@ -180,7 +180,7 @@ test('Arriesgo la misma palabra incorrecta dos veces', async ({ page }) => {
 	}
 
 	// Then: debería ver la letra 'Y' en la letras arriesgadas UNA SOLA VEZ
-	expect(await page.locator('#guesses').innerText()).toEqual('y');
+	expect(await page.locator('#guesses').innerText()).toEqual('Y');
 });
 
 //  Scenario: Arriesgo la misma palabra correcta dos veces
@@ -207,7 +207,7 @@ test('Arriesgo la misma palabra correcta dos veces', async ({ page }) => {
 	}
 
 	// Then: debería ver la letra 'Y' en la letras arriesgadas UNA SOLA VEZ
-	expect(await page.locator('#guesses').innerText()).toEqual('g');
+	expect(await page.locator('#guesses').innerText()).toEqual('G');
 });
 
 //  Scenario: Cuando recargo la pagina, se debe mantener el estado de la partida
@@ -240,8 +240,8 @@ test('Cuando recargo la pagina, se debe mantener el estado de la partida', async
 	await page.reload();
 
 	// Then: debería ver la letra 'g' y 'x' en la letras arriesgadas
-	expect(await page.locator('#guesses').innerText()).toContain('g');
-	expect(await page.locator('#guesses').innerText()).toContain('x');
+	expect(await page.locator('#guesses').innerText()).toContain('G');
+	expect(await page.locator('#guesses').innerText()).toContain('X');
 
 	// Then: debería ver la letra revelada en la palabra
 	expect(await page.locator('[data-testid="letter-0"]').innerText()).toBe('_');
