@@ -1,4 +1,16 @@
 import { expect, test } from '@playwright/test';
+import { Api } from '../src/lib/api';
+
+const api = new Api('http://localhost:8000');
+
+test.beforeAll(async () => {
+	for (let i = 0; i < 10; i++) {
+		const { ok } = await api.healthCheck();
+		if (ok) {
+			break;
+		}
+	}
+});
 
 // Scenario: Iniciar partida
 test('Iniciar partida', async ({ page }) => {
