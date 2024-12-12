@@ -1,7 +1,9 @@
 package logic
 
-import "strings"
-import "unicode"
+import (
+	"strings"
+	"unicode"
+)
 
 type GameResponse int64
 
@@ -21,7 +23,7 @@ type GameState struct {
 
 func CreateGame(word string) GameState {
 	return GameState{
-		lives:       7,
+		lives:       70,
 		word:        strings.ToUpper(word),
 		usedLetters: []rune{},
 	}
