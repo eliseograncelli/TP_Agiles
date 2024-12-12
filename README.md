@@ -82,5 +82,5 @@ All checks were successful
 ✓  Go/Unit Tests in Backend (pull_request)                                       18s      
 ✓  Vercel                                              Deployment has completed           
 ✓  Vercel Preview Comments                                                                
-
 ```
+
