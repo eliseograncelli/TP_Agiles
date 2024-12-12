@@ -23,7 +23,7 @@ type GameState struct {
 
 func CreateGame(word string) GameState {
 	return GameState{
-		lives:       70,
+		lives:       7,
 		word:        strings.ToUpper(word),
 		usedLetters: []rune{},
 	}
