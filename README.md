@@ -25,7 +25,7 @@ go install github.com/smartystreets/goconvey@latest
 goconvey 
 ```
 
-You can see the code that has been covered by the tests in [this report](https://html-preview.github.io/?url=https://github.com/eliseograncelli/TP_Agiles/blob/main/frontend/logic/cover.html#ec600507-849d-5f0c-a0b2-d76d4f61c4fa).
+You can see the code that has been covered by the tests in [this report](https://html-preview.github.io/?url=https://github.com/eliseograncelli/TP_Agiles/blob/main/backend/logic/cover.html).
 It is automatically updated using a github action.
 
 
