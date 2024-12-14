@@ -64,10 +64,11 @@ Then('debería ver la letra {string} en la letras arriesgadas', async function (
 });
 
 Then('debería ver la letra revelada como {string}', async function (string) {
-	string.split(' ').forEach(async (word) => {
-		const dash = page.locator(`[data-testid="letter-${word}"]`);
-		expect(await dash.innerText()).toBe(word);
-	});
+	const letters = string.split(' ');
+	for (let i = 0; i < letters.length; i++) {
+		const dash = page.locator(`[data-testid="letter-${i}"]`);
+		expect(await dash.innerText()).toBe(letters[i]);
+	}
 });
 
 Then('la cabeza es {string}', function (string) {

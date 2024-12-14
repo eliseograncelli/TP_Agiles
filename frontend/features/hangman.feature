@@ -12,6 +12,6 @@ Feature: Hangman
     Given Partida iniciada con la palabra "agil"
     When intento la letra "g"
     Then debería ver la letra "G" en la letras arriesgadas
-    Then debería ver la letra revelada como "_ G _ L"
+    Then debería ver la letra revelada como "_ G _ _"
     Then la cabeza es "visible"
     Then la cuerpo es "no visible"
