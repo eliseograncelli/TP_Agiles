@@ -6,8 +6,8 @@ on:
 
 
 jobs:
-  acceptance-tests:
-    name: Acceptance Tests
+  e2e-tests:
+    name: E2E Tests
     runs-on: ubuntu-22.04
     strategy:
       matrix:
@@ -45,3 +45,49 @@ jobs:
       - name: Run Playwright 
         working-directory: ./frontend
         run: pnpm test:e2e 
+
+
+  acceptance-tests:
+    name: Acceptance Tests
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Browsers 
+        working-directory: ./frontend
+        run: npx playwright install
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "^1.20"
+
+      - name: Run Backend 
+        working-directory: ./backend
+        run: go build && ./utn &
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: pnpm install --frozen-lockfile; mv .env.example .env
+
+      - name: Run frontend 
+        working-directory: ./frontend
+        run: pnpm dev 
+
+
+      - name: Run Playwright 
+        working-directory: ./frontend
+        run: pnpm test:acceptance --exit
