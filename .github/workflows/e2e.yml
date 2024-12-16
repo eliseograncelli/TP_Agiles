@@ -58,7 +58,7 @@ jobs:
 
       - name: Install Browsers 
         working-directory: ./frontend
-        run: npx playwright install
+        run: pnpm exec playwright install
 
       - name: Set up Go
         uses: actions/setup-go@v4
