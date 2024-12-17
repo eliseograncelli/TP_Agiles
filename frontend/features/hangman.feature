@@ -42,13 +42,13 @@ Feature: Hangman
       | hola | J      | _ _ _ _   |
       | perro| Y      | _ _ _ _ _ |
 
-  # Scenario: Arriesgar la palabra correcta
-  #   Given Partida iniciada con la palabra "<word>"
-  #   When intento la palabra "<word>"
-  #   Then deberia aparecerme un cartel que diga "Ganaste"
+  Scenario: Arriesgar la palabra correcta
+    Given Partida iniciada con la palabra "<word>"
+    When intento la palabra "<word>"
+    Then deberia aparecerme un cartel que diga "Ganaste"
 
-  #   Examples:
-  #     | word |
-  #     | agil |
-  #     | hola |
-  #     | test |
+    Examples:
+      | word |
+      | agil |
+      | hola |
+      | test |
