@@ -13,9 +13,11 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"test:e2e": "playwright test",
+		"test:acceptance": "cucumber-js",
 		"test:unit": "vitest"
 	},
 	"devDependencies": {
+		"@cucumber/cucumber": "^11.1.1",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",

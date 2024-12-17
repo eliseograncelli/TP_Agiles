@@ -49,7 +49,7 @@
 		</p>
 		<button on:click={copyToClipboard}>Copy to clipboard</button>
 	{:else}
-		<input type="text" bind:value={word} placeholder="Enter a word" />
+		<input type="text" bind:value={word} placeholder="Enter a word" id="new-game-input" />
 		<button on:click={onCreateGame}>Create Game</button>
 	{/if}
 </main>

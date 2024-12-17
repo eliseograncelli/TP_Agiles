@@ -42,6 +42,10 @@ jobs:
         working-directory: ./frontend
         run: npx playwright install
 
+      - name: Run frontend 
+        working-directory: ./frontend
+        run: pnpm dev &
+
       - name: Run Playwright 
         working-directory: ./frontend
-        run: pnpm test:e2e 
+        run: pnpm test:acceptance --exit
