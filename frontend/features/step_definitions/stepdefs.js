@@ -65,7 +65,7 @@ Given('Partida iniciada con la palabra {string}', async function (word) {
 
 When('intento la letra {string}', async function (string) {
 	/** @type {Page} */ const page = this.page;
-	page.locator('#letter-input').fill(string);
+	await page.locator('#letter-input').fill(string);
 	await Promise.allSettled([
 		page.locator('#letter-btn').click(),
 		page.waitForResponse((response) => response.ok())
@@ -86,12 +86,12 @@ Then('debería ver la letra revelada como {string}', async function (string) {
 	}
 });
 
-Then('la cabeza es {string}', function (string) {
+Then('la cabeza es {string}', { timeout: 10000 }, async function (estado) {
 	/** @type {Page} */ const page = this.page;
-	if (string === 'visible') {
-		expect(page.locator('.head')).toBeVisible();
+	if (estado === 'visible') {
+		await expect(page.locator('.head')).toBeVisible();
 	} else {
-		expect(page.locator('.head')).not.toBeVisible();
+		await expect(page.locator('.head')).not.toBeVisible();
 	}
 });
 
@@ -103,3 +103,41 @@ Then('la cuerpo es {string}', function (string) {
 		expect(page.locator('.body')).not.toBeVisible();
 	}
 });
+
+
+
+// Aca arranco
+
+
+
+Then('la palabra revelada deberia seguir igual', async function () {
+	/** @type {Page} */ const page = this.page;
+	//const letters = string.split(' ');
+	for (let i = 0; i < 3; i++) {
+		//const dash = page.locator(`[data-testid="letter-${i}"]`);
+		expect(await page.locator(`[data-testid="letter-${i}"]`).innerText()).toBe('_');		
+	}
+
+  });
+
+
+  When('intento la palabra {string}', async function (word) {
+	/** @type {Page} */ const page = this.page;
+	await page.locator('#word-input').fill(word);
+	await Promise.allSettled([
+		page.locator('#word-btn').click(),
+		page.waitForResponse((response) => response.ok())
+	]);
+});   
+
+
+
+
+
+  Then('deberia aparecerme un cartel que diga {string}', async function (string) {
+	/** @type {Page} */ const page = this.page;
+	const dialog = await page.waitForEvent('dialog');
+	expect(dialog.message()).toBe('Ganaste');
+});
+
+ 
