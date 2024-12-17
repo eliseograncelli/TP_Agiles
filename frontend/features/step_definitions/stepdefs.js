@@ -19,7 +19,7 @@ When('clicko en el botón Jugar', async function () {
 });
 
 Given('ingreso la palabra {string}', function (word) {
-	page.locator('input').fill(word);
+	page.locator('#new-game-input').fill(word);
 });
 
 Then('debería ver el link a la partida', function () {
@@ -63,7 +63,7 @@ Then('debería ver la letra {string} en la letras arriesgadas', async function (
 	expect(await page.locator('#guesses').innerText()).toContain(word);
 });
 
-Then('debería ver la letra revelada como {string}', async function (string) {
+Then('se ve la palabra revelada {string}', async function (string) {
 	const letters = string.split(' ');
 	for (let i = 0; i < letters.length; i++) {
 		const dash = page.locator(`[data-testid="letter-${i}"]`);
@@ -89,14 +89,14 @@ Then('la cuerpo es {string}', function (string) {
 
 // Aca arranco
 
-Then('la palabra revelada deberia seguir igual', async function () {
-	/** @type {Page} */ const page = this.page;
-	//const letters = string.split(' ');
-	for (let i = 0; i < 3; i++) {
-		//const dash = page.locator(`[data-testid="letter-${i}"]`);
-		expect(await page.locator(`[data-testid="letter-${i}"]`).innerText()).toBe('_');
-	}
-});
+// Then('la palabra revelada deberia seguir igual', async function () {
+// 	/** @type {Page} */ const page = this.page;
+// 	//const letters = string.split(' ');
+// 	for (let i = 0; i < 3; i++) {
+// 		//const dash = page.locator(`[data-testid="letter-${i}"]`);
+// 		expect(await page.locator(`[data-testid="letter-${i}"]`).innerText()).toBe('_');
+// 	}
+// });
 
 When('intento la palabra {string}', async function (word) {
 	/** @type {Page} */ const page = this.page;
