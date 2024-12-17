@@ -52,3 +52,16 @@ Feature: Hangman
       | agil |
       | hola |
       | test |
+
+
+  Scenario: Arriesgar la palabra incorrecta
+    Given Partida iniciada con la palabra "<word>"
+    When intento la palabra "<guess>"
+    Then deberia aparecerme un cartel que diga "Perdiste"
+
+    Examples:
+      | word | guess |
+      | agil | hola  |
+      | hola | test  |
+      | test | agil  |
+  
